@@ -1,0 +1,874 @@
+# GigE Vision 3.0 需求条款索引（Requirements Index）
+
+> 自动生成：列出规范正文中全部现行需求/目标条款的编号、类型、适用对象、所在章节与 PDF 页码，并关联附录 A（Appendix A: Requirements Reference Tables, PDF p.370–401）中的“引入版本”和 1.x 旧编号；“中文要点”为意译摘要，**不是原文**——需要原文时在 PDF 中搜索编号（如 `R-421cd`）即可定位。
+> 页码为 PDF 页码（印刷页码 = PDF 页码 − 1）。同目录下 `requirements_index.csv` 可在 Excel 中筛选；已废弃条款见 [deprecated_requirements.md](deprecated_requirements.md)。
+
+## 如何阅读需求编号
+
+编号格式 `[<类型>-<序号><后缀>]`，例如 `[R-061cd]` = 第 61 号、仅适用于设备的绝对需求（详见 §1.3.2, p.19–20 与 [01_introduction_and_architecture.md](../00_overview/01_introduction_and_architecture.md)）。
+
+| 类型 | 含义 | 数量 |
+|---|---|---|
+| `R` | 绝对需求 MUST | 231 |
+| `CR` | 条件需求 MUST(若…) | 232 |
+| `O` | 绝对目标 SHOULD | 44 |
+| `CO` | 条件目标 SHOULD(若…) | 14 |
+
+| 后缀 | 适用对象 | 数量 |
+|---|---|---|
+| `ca` | 仅应用软件（control application） | 43 |
+| `cd` | 仅设备（control device） | 280 |
+| `c` | 应用与设备（control 两端） | 43 |
+| `st` | 仅流发送端（stream transmitter） | 100 |
+| `sr` | 仅流接收端（stream receiver） | 15 |
+| `s` | 流发送端与接收端 | 40 |
+| `无` | 无后缀：全部角色 | 0 |
+
+**合计：521 条现行条款**；附录 A 另列出 197 条已废弃条款。
+
+### 按引入版本统计
+
+| 引入版本 | 条款数 |
+|---|---|
+| 1.0 | 246 |
+| 1.1 | 33 |
+| 1.2 | 6 |
+| 2.0 | 101 |
+| 2.1 | 21 |
+| 2.2 | 30 |
+| 3.0 | 84 |
+
+### 按章节统计
+
+| 章节 | 所属部分 | 条款数 |
+|---|---|---|
+| [Chapter 3. Physical Link Configuration](#ch-3) | PART 1 - Device Discovery | 12 |
+| [Chapter 4. IP Configuration](#ch-4) | PART 1 - Device Discovery | 17 |
+| [Chapter 5. Device Enumeration](#ch-5) | PART 1 - Device Discovery | 9 |
+| [Chapter 6. Device Attachment and Removal](#ch-6) | PART 1 - Device Discovery | 1 |
+| [Chapter 8. GVCP Transport Protocol Considerations](#ch-8) | PART 2 - GVCP | 15 |
+| [Chapter 10. Control Channel](#ch-10) | PART 2 - GVCP | 23 |
+| [Chapter 11. Stream Channel](#ch-11) | PART 2 - GVCP | 14 |
+| [Chapter 12. Message Channel](#ch-12) | PART 2 - GVCP | 15 |
+| [Chapter 13. Device with Multiple Network Interfaces](#ch-13) | PART 2 - GVCP | 6 |
+| [Chapter 14. Additional Concepts](#ch-14) | PART 2 - GVCP | 15 |
+| [Chapter 15. GVCP Headers](#ch-15) | PART 2 - GVCP | 9 |
+| [Chapter 16. Control Channel Dictionary](#ch-16) | PART 2 - GVCP | 90 |
+| [Chapter 17. Message Channel Dictionary](#ch-17) | PART 2 - GVCP | 13 |
+| [Chapter 18. Command and Acknowledge Values](#ch-18) | PART 2 - GVCP | 1 |
+| [Chapter 19. Status Codes](#ch-19) | PART 2 - GVCP | 4 |
+| [Chapter 20. Events](#ch-20) | PART 2 - GVCP | 1 |
+| [Chapter 21. ICMP](#ch-21) | PART 2 - GVCP | 1 |
+| [Chapter 23. GVSP Transport Protocol Considerations](#ch-23) | PART 3 - GVSP | 6 |
+| [Chapter 24. GVSP Data Block](#ch-24) | PART 3 - GVSP | 27 |
+| [Chapter 25. GVSP Payload Types](#ch-25) | PART 3 - GVSP | 22 |
+| [Chapter 26. Pixel Layouts](#ch-26) | PART 3 - GVSP | 4 |
+| [Chapter 29. GVRSP Streaming](#ch-29) | PART 4 - GVRSP | 14 |
+| [Chapter 30. GVRSP Stream Channel](#ch-30) | PART 4 - GVRSP | 3 |
+| [Chapter 31. GVRSP Connection Maintenance](#ch-31) | PART 4 - GVRSP | 12 |
+| [Chapter 32. Upstream Communication](#ch-32) | PART 4 - GVRSP | 9 |
+| [Chapter 33. Application-Level Flow Control](#ch-33) | PART 4 - GVRSP | 7 |
+| [Chapter 34. Shared Receive Queues](#ch-34) | PART 4 - GVRSP | 1 |
+| [Chapter 36. Bootstrap Registers](#ch-36) | PART 5 - Bootstrap Registers | 144 |
+| [Chapter 37. Standard Features List for Cameras](#ch-37) | Interoperability | 21 |
+| [Chapter 38. Using GenDC Streams](#ch-38) | Interoperability | 2 |
+| [Chapter 39. Testing](#ch-39) | Interoperability | 3 |
+
+## v3.0 新增条款速览（84 条）
+
+| 编号 | 适用 | 章节 | 页 | 中文要点 |
+|---|---|---|---|---|
+| `R-615ca` | 应用 | §11.1 | 82 | 接收端必须同时支持 GVSP 和 GVRSP；能否以 GVRSP 模式运行可能受主机操作系统和网卡硬件的限制。 |
+| `CR-616cd` | 设备 | §11.13 | 88 | 若设备仅支持 GVRSP 流（Streaming Capability 寄存器的 gvsp_mode_not_supported 位与 gvrsp_mode_supported 位均置位），则不得置位 GVSP Stream Channel Capability 寄存器的 unconditional_streaming_supported 位。 |
+| `R-604cd` | 设备 | §16.2.1 | 123 | FORCEIP_CMD 不得修改任何 Persistent IP（持久 IP）配置。 |
+| `CR-617s` | 流收发两端 | §29.2 | 212 | 使用 GVRSP 流模式时，载荷数据必须按 GenICam GenDC 版本 1 定义的格式组织（允许任意次版本）。 |
+| `CR-618st` | 流发送端 | §29.2 | 213 | GVRSP 模式下，发送端每发送一个 block 都必须使用 buffer layout table 中配置的所有 buffer；若实际载荷数据少于接收端预期，必须以不完整和/或空传输补齐剩余 buffer。 |
+| `CR-619st` | 流发送端 | §29.2 | 214 | GVRSP 模式下，发送端向任一 buffer 传输的数据量都不得超过 buffer layout table 中为该 buffer 配置的大小。 |
+| `CR-620st` | 流发送端 | §29.3 | 214 | GVRSP 模式下，当 RSCCTLx 寄存器的 stream_enable 位为 1 时，发送端必须冻结 buffer layout table 的内容。 |
+| `R-621s` | 流收发两端 | §29.3 | 215 | buffer layout table 的 buffer_count 字段必须大于或等于 1。 |
+| `R-622s` | 流收发两端 | §29.3 | 215 | buffer layout table 中属于 flow X 的所有 buffer[n].size 之和，必须等于对应 GenDC flow mapping table 中 flow X 的 FlowSize。 |
+| `R-623s` | 流收发两端 | §29.3 | 215 | buffer layout table 中所有 buffer[n].size 之和必须等于 SFNC 特性 PayloadSize。 |
+| `R-624s` | 流收发两端 | §29.3 | 215 | buffer layout table 的第一个 buffer 必须经由 GenDC flow 0 传输（buffer[0].flow_id = 0）。 |
+| `R-625s` | 流收发两端 | §29.3 | 215 | duplicate 位必须仅在 buffer layout table 的第一个 buffer 上置位（buffer[0].duplicate = 1）。 |
+| `R-626st` | 流发送端 | §29.3 | 215 | 当 Buffer Layout Table 中第一个 buffer 的 duplicate 位置位时，该 buffer 必须在指定 flow 上作为该 block 的最后一个 buffer 再发送一次。 |
+| `R-627s` | 流收发两端 | §29.3 | 215 | buffer layout table 的所有字段都必须使用网络字节序（大端）。 |
+| `CR-628s` | 流收发两端 | §29.4 | 219 | GVRSP 模式下，若 container 的大小可能逐个变化，发送端必须使用第一个 buffer 的副本（duplicate of the first buffer）。 |
+| `CR-629st` | 流发送端 | §29.4 | 219 | GVRSP 模式下启用首 buffer 副本时，若在发出 block 的第一个 buffer 后中止传输，发送端必须发送一个空的副本 buffer 以标示该 block 不完整。 |
+| `CR-630st` | 流发送端 | §29.4 | 219 | GVRSP 模式下启用首 buffer 副本时，发送端必须仅在以下任一条件满足后才发送副本 buffer：能保证整个 block 送达；或需中止该 block 的传输（此时副本 buffer 为空）。 |
+| `CR-631st` | 流发送端 | §30.1 | 222 | GVRSP 模式下，当流通道未使能（RSCCTLx 寄存器的 stream_enable 位未置位）时，发送端不得在该流通道上发送流数据。 |
+| `CR-632st` | 流发送端 | §30.1 | 222 | GVRSP 模式下，若该流通道有任一 GenDC flow 尚无关联的已连接 QP，发送端必须以 GEV_STATUS_BUSY 回应 Stream Enable 请求（置位 RSCCTLx 的 stream_enable 位），并保持 Configuration 状态。 |
+| `CR-633st` | 流发送端 | §30.2 | 222 | GVRSP 模式下，当向 GVRSP Stream Channel Control 寄存器的 stream_enable 位写入 0 时，发送端必须断开该流所有已打开的 QP。 |
+| `CR-634sr` | 流接收端 | §31.1 | 223 | 接收端通过发送连接请求消息（CM REQ）发起 RoCEv2 连接时，必须使用 Reliable Connection 传输服务类型，并采用 GigE Vision 服务对应的 ServiceID（TCP 端口 3956）。 |
+| `CR-635st` | 流发送端 | §31.1 | 223 | GVRSP 模式下，若 CM REQ 中的 ServiceID 对 GigE Vision 服务无效，发送端必须拒绝该连接请求（见 31.4 节）。 |
+| `CR-636st` | 流发送端 | §31.2 | 224 | GVRSP 模式下，发送端作为 CM 响应方必须始终答复连接请求（CM REQ）：回复 CM REP 或连接拒绝消息（CM REJ）。 |
+| `CR-637st` | 流发送端 | §31.2 | 224 | GVRSP 模式下，当控制通道处于关闭状态时，发送端必须拒绝连接请求（CM REQ）（见 31.4 节）。 |
+| `CR-638st` | 流发送端 | §31.3 | 228 | GVRSP 模式下，当 GVRSP Stream Channel Control 寄存器的 stream_enable 位为 1 时，发送端必须拒绝针对该流的所有连接请求（CM REQ）。 |
+| `CR-639sr` | 流接收端 | §31.3 | 228 | GVRSP 模式下，接收端必须为每个 GenDC flow 连接一个独立的 QP，并为每个 flow 发送一条 CM REQ，在其 Consumer Private Data 字段中按图 31-2 填入对应的 flow_id、stream_channel_index 和正确的 qp_connection_key。 |
+| `CR-640st` | 流发送端 | §31.3 | 228 | GVRSP 模式下，若 CM REQ 中 stream_channel_index 与 flow_id 的组合无效，发送端必须拒绝该连接请求（见 31.4 节）。 |
+| `CR-641st` | 流发送端 | §31.3 | 228 | GVRSP 模式下，若 CM REQ 中的 signature 无效，发送端必须拒绝该连接请求（见 31.4 节）。 |
+| `CR-642st` | 流发送端 | §31.3 | 228 | GVRSP 模式下，若 CM REQ 中的 version 不受支持，发送端必须拒绝该连接请求（见 31.4 节）。 |
+| `CR-643st` | 流发送端 | §31.3 | 228 | GVRSP 模式下，若某 GenDC flow 已分配了打开的 QP，发送端必须拒绝针对该 flow 的连接请求（CM REQ）（见 31.4 节）。 |
+| `CR-644st` | 流发送端 | §31.3 | 228 | GVRSP 模式下，支持多网络接口的发送端若无法将 stream_channel_index 或 flow_id 映射到 REQ 消息所到达的物理网络接口，必须拒绝该 CM REQ（见 31.4 节）。 |
+| `CR-645s` | 流收发两端 | §31.4 | 229 | 流发送端或接收端因 GigE Vision 特定原因产生的所有 REJ 消息，必须在 Reason 字段使用 Consumer Reject 代码，并按图 31-3 在 PrivateData 字段提供附加错误信息。 |
+| `CR-646s` | 流收发两端 | §32 | 234 | GVRSP 上行（upstream）消息的所有字段都必须使用网络字节序（大端）。 |
+| `CR-647sr` | 流接收端 | §32 | 234 | GVRSP 模式下，流接收端必须支持 MSG_CREDITS 消息。 |
+| `CR-648st` | 流发送端 | §32 | 234 | GVRSP 模式下，流发送端必须支持 MSG_CREDITS 消息。 |
+| `CR-649st` | 流发送端 | §32 | 235 | GVRSP 模式下，流发送端必须通过设备 bootstrap 寄存器 RSCUCAPx 中相应的能力位，声明其对所有可选上行消息类型（设备专有消息除外）的支持情况。 |
+| `CR-650sr` | 流接收端 | §32 | 235 | GVRSP 模式下，流接收端必须仅通过对应流通道中 GenDC flow 0 的已连接 QP 发送上行消息。 |
+| `CR-651st` | 流发送端 | §32 | 235 | GVRSP 模式下，流发送端必须仅接受经 GenDC flow 0 已连接 QP 送达的上行消息，对该流通道其他 GenDC flow 上收到的上行消息不予处理，且收到此类消息时不得产生任何 InfiniBand/RoCEv2 传输层错误。 |
+| `CR-652sr` | 流接收端 | §32 | 236 | GVRSP 模式下，流接收端不得发送大于 RSCUMAXx 寄存器（GVRSP Stream Channel Upstream Maximum Supported Message Size）所规定大小的上行消息。 |
+| `CR-653st` | 流发送端 | §32 | 236 | GVRSP 模式下，流发送端必须随时准备接收、接受并肯定确认任何不超过 RSCUMAXx 寄存器规定大小的上行消息；即使消息无效（如类型不支持、经非 0 号 GenDC flow 送达、所请求的操作无法执行），也不得产生任何 InfiniBand/RoCEv2 传输层错误。 |
+| `CR-654sr` | 流接收端 | §32.3 | 237 | GVRSP 模式下，流接收端发送设备专有（device-specific）上行消息时，必须将 opcode 字段的最高有效位置 1。 |
+| `CR-655st` | 流发送端 | §33.1 | 238 | GVRSP 模式下，流发送端处于 Configuration 状态（即对应流通道 RSCCTLx 的 stream_enable 位为 0）时，必须将 container credit 计数器置为 0。 |
+| `CR-656st` | 流发送端 | §33.1 | 238 | GVRSP 模式下，流发送端每收到一条有效的 MSG_CREDITS 上行消息，都必须将 container credit 计数器增加该消息所指定的 credit 数。 |
+| `CR-657st` | 流发送端 | §33.1 | 238 | GVRSP 模式下，流发送端必须在某个 block（GenDC container）被提交发送时递减 container credit 计数器，且最晚不得迟于该 block 最后一个字节的发送。 |
+| `CR-658st` | 流发送端 | §33.1 | 238 | GVRSP 模式下，若 container credit 计数器不大于 0，流发送端不得开始发送新的 block（GenDC container）。 |
+| `CR-659sr` | 流接收端 | §33.1 | 239 | GVRSP 模式下，流接收端发送的 MSG_CREDITS 上行消息所指定的 credit 数不得导致发送端 credit 计数器溢出；计数器最大值由 RSCCMAXx 寄存器定义。 |
+| `CR-660st` | 流发送端 | §33.1 | 239 | GVRSP 模式下，若流发送端收到的 MSG_CREDITS 上行消息所指定的 credit 数会使其 credit 计数器溢出，必须按 31.5 节释放所有已连接的 Queue Pair，以保持收发两端计数同步；流接收端随后需重新建立连接。 |
+| `CR-661sr` | 流接收端 | §33.1 | 239 | GVRSP 模式下，流接收端必须先为某 GenDC container 对应的所有 buffer 投递 QP 接收请求，再为该 container 发放 container credit；一次发放多个 credit 时，必须确保对应各 container 的所有 buffer 均已投递接收请求。 |
+| `CR-662sr` | 流接收端 | §34 | 241 | GVRSP 模式下，接收端不得为流通道 QP 使用 Shared Receive Queue，以免 buffer 被乱序接收。 |
+| `R-605cd` | 设备 | §36.23 | 287 | 设备支持的流通道数量必须保持不变，不随所选的流协议或任何其他设备配置而改变。 |
+| `R-606s` | 流收发两端 | §36.27 | 291 | 当 gvsp_mode_not_supported 位未置位时，发送端、接收端和收发端设备必须至少支持 Table 25-1 所列 GVSP 负载类型中的一种。 |
+| `R-607s` | 流收发两端 | §36.27 | 291 | 发送端、接收端和收发端设备必须至少支持 GVSP 或 GVRSP 中的一种流协议：gvsp_mode_not_supported 位未置位表示支持 GVSP，gvrsp_mode_supported 位置位表示支持 GVRSP。 |
+| `CR-663cd` | 设备 | §36.27 | 291 | 若设备支持 GVRSP 流传输，则它必须是发送端（Transmitter，由 Device Mode 寄存器的 device_class 字段报告）。 |
+| `CR-664cd` | 设备 | §36.27 | 291 | 若设备仅支持 GVRSP 流（gvsp_mode_not_supported 与 gvrsp_mode_supported 位均置位），则不得置位 SCSPx_supported 位。 |
+| `CR-665cd` | 设备 | §36.27 | 291 | 若设备支持 GVRSP 流（gvrsp_mode_supported 位置位），则必须置位 SCEBAx_supported 位。 |
+| `CR-666cd` | 设备 | §36.29 | 294 | 若设备仅支持 GVRSP 流（Streaming Capability 寄存器的 gvsp_mode_not_supported 与 gvrsp_mode_supported 位均置位），则不得置位 GVCP Capability 寄存器的 PACKETRESEND 位。 |
+| `R-667cd` | 设备 | §36.38 | 305 | 当任一 GVSP 流通道已打开（某 SCPx 非零）或任一 GVRSP 流已使能（某 RSCCTLx 的 stream_enable 位置位）时，设备必须禁止写 Streaming Configuration 寄存器；此时应用写入必须返回 GEV_STATUS_BUSY。 |
+| `R-668cd` | 设备 | §36.38 | 305 | 设备必须强制对 streaming_protocol 字段的写入遵循 Table 36-2 的规则。 |
+| `CR-669cd` | 设备 | §36.38 | 306 | 若设备支持 GVSP 流（Streaming Capability 寄存器的 gvsp_mode_not_supported 位未置位），则 Streaming Configuration 寄存器 streaming_protocol 字段的出厂默认值必须为 0。 |
+| `CR-670cd` | 设备 | §36.38 | 306 | 若设备仅支持 GVRSP 流（Streaming Capability 寄存器的 gvsp_mode_not_supported 与 gvrsp_mode_supported 位均置位），则 Streaming Configuration 寄存器 streaming_protocol 字段的出厂默认值必须为 1。 |
+| `CR-608cd` | 设备 | §36.49 | 316 | 若 GVCP Capability 寄存器的 control_channel_large_packet_size 位置位，设备必须实现 Control Channel Max Packet Size（CCMPS）寄存器。 |
+| `CR-609cd` | 设备 | §36.49 | 316 | 设备使用的控制通道最大包大小值必须 4 字节对齐，因为控制通道命令只支持 4 字节的整数倍。 |
+| `CR-610cd` | 设备 | §36.49 | 316 | CCMPS 中 max_packet_size 的值必须至少为 576。 |
+| `CR-611cd` | 设备 | §36.50 | 317 | 若 GVCP Capability 寄存器的 control_channel_large_packet_size 位置位，设备必须实现 Control Channel Test Region Address（CCTRA）寄存器。 |
+| `R-671cd` | 设备 | §36.57 | 322 | 若实现了 SCPx 寄存器，当设备工作于 GVRSP 模式（Streaming Configuration 寄存器 streaming_protocol 字段为 1）时，必须阻止对其访问并返回 GEV_STATUS_ACCESS_DENIED。 |
+| `CR-672cd` | 设备 | §36.71 | 341 | 若设备支持 GVRSP 协议，则必须为其所有流通道实现 GVRSP Stream Channel Control（RSCCTLx）寄存器。 |
+| `CR-673cd` | 设备 | §36.71 | 341 | 若设备同时支持 GVSP 和 GVRSP 模式，则在 GVSP 模式下（Streaming Configuration 寄存器 streaming_protocol 字段为 0）必须禁止对 RSCCTLx 寄存器的任何访问，对其读写均须返回 GEV_STATUS_ACCESS_DENIED。 |
+| `CR-674cd` | 设备 | §36.72 | 342 | 若设备支持 GVRSP 协议，则必须为其所有流通道实现 GVRSP Stream Channel Buffer Layout Table Address（RSCBLTAx）寄存器。 |
+| `CR-675cd` | 设备 | §36.73 | 342 | 若设备支持 GVRSP 协议，则必须为其所有流通道实现 GVRSP Stream Channel Buffer Layout Table Size（RSCBLTSx）寄存器。 |
+| `CR-676cd` | 设备 | §36.73 | 342 | RSCBLTSx 寄存器的值必须不小于 4 + 8 = 12 字节（buffer_count 加至少一个缓冲区条目）。 |
+| `CR-677cd` | 设备 | §36.74 | 343 | 若设备支持 GVRSP 协议，则必须为其所有流通道实现 GVRSP Stream Channel Credits Counter Maximum Supported Value（RSCCMAXx）寄存器。 |
+| `CR-678cd` | 设备 | §36.74 | 343 | RSCCMAXx 寄存器（信用计数器最大支持值）的值必须不小于 1。 |
+| `CR-679cd` | 设备 | §36.75 | 344 | 若设备支持 GVRSP 协议，则必须为其所有流通道实现 GVRSP Stream Channel Credits Counter Current Value（RSCCCNTx）寄存器。 |
+| `CR-680cd` | 设备 | §36.76 | 345 | 若设备支持 GVRSP 协议，则必须为其所有流通道实现 GVRSP Stream Channel Upstream Capability（RSCUCAPx）寄存器。 |
+| `CR-681cd` | 设备 | §36.77 | 345 | 若设备支持 GVRSP 协议，则必须为其所有流通道实现 GVRSP Stream Channel Upstream Maximum Supported Message Size（RSCUMAXx）寄存器。 |
+| `CR-682cd` | 设备 | §36.77 | 346 | RSCUMAXx 寄存器的值必须不小于 4（即必备的 MSG_CREDITS 消息的大小）；若设备支持设备自定义的上行消息，该值可大于 4。 |
+| `CR-683cd` | 设备 | §36.78 | 346 | 若设备支持 GVRSP 协议，则必须为其所有流通道实现 GVRSP Stream Channel QP Connection Key（RSCCKEYx）寄存器。 |
+| `CR-684cd` | 设备 | §36.78 | 346 | 若设备同时支持 GVSP 和 GVRSP 模式，则在 GVSP 模式下（Streaming Configuration 寄存器 streaming_protocol 字段为 0）必须禁止对 RSCCKEYx 寄存器的任何访问，对其读写均须返回 GEV_STATUS_ACCESS_DENIED。 |
+| `CR-685st` | 流发送端 | §36.78 | 347 | 若发送端工作于 GVRSP 模式，则其控制通道关闭时必须将 RSCCKEYx 寄存器内容复位为出厂默认值（0）。 |
+| `CR-686st` | 流发送端 | §36.78 | 347 | 若发送端工作于 GVRSP 模式，则必须拒绝所携 qp_connection_key 与相应流通道 RSCCKEYx 引导寄存器值不相等的连接请求（CM REQ），见 31.4 节。 |
+| `CR-687st` | 流发送端 | §36.78 | 347 | 若发送端工作于 GVRSP 模式，则必须拒绝 qp_connection_key 为 0 的连接请求（CM REQ），因 0 不是有效的 qp_connection_key（见 31.4 节）。 |
+| `CR-612cd` | 设备 | §37.7 | 364 | 若设备支持 IEEE 1588 时间同步，则必须实现 SFNC 特性 PtpEnable、PtpClockAccuracy、PtpDataSetLatch、PtpStatus、PtpServoStatus、PtpOffsetFromMaster、PtpClockID、PtpParentClockID 和 PtpGrandmasterClockID。 |
+| `CR-613st` | 流发送端 | §38 | 365 | 若发送端实现了 Stream Channel GenDC Descriptor Address 寄存器，则当 TLParamsLocked 特性置位时，GenDC 预取描述符（prefetch descriptor）的内容必须冻结。 |
+| `CR-614st` | 流发送端 | §38 | 365 | 若发送端实现了 Stream Channel GenDC Flow Mapping Table Address 寄存器，则当 TLParamsLocked 特性置位时，GenDC 流映射表的内容必须冻结。 |
+
+## 全部条款（按章节）
+
+
+<a id="ch-3"></a>
+### Chapter 3. Physical Link Configuration  ·  PART 1 - Device Discovery
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `R-001cd` | R | 设备 | §3.1 Single Link Configuration | 35 | 1.0（1.x: `[R12-1cd]`） | 每台设备必须至少具备一个网络接口。 |
+| `R-002cd` | R | 设备 | §3.1 Single Link Configuration | 35 | 2.0 | 所有设备都必须支持单链路（SL）配置。 |
+| `R-003cd` | R | 设备 | §3.2 Multiple Links Configuration | 35 | 1.0（1.x: `[R12-2cd]`） | 设备所支持的不同网络接口数量必须不超过 4 个。 |
+| `CR-004cd` | CR | 设备 | §3.2 Multiple Links Configuration | 35 | 1.0（1.x: `[CR3-3cd]`） | 若设备支持多链路（ML）配置，则在 ML 配置下每个网络接口都必须独立执行 IP 配置过程。 |
+| `CR-005cd` | CR | 设备 | §3.2 Multiple Links Configuration | 36 | 1.0（1.x: `[CR12-3cd]`） | 若设备支持 ML 配置，则必须为每个网络接口上与 IP 配置相关的 bootstrap 寄存器提供独立的存储。 |
+| `R-006cd` | R | 设备 | §3.2 Multiple Links Configuration | 36 | 1.0（1.x: `[R12-5cd]`） | FORCEIP 消息只能用于接口 #0；其他网络接口（若有）必须通过 Persistent IP、DHCP 或 LLA 获取 IP 配置。 |
+| `CR-007s` | CR | 流收发两端 | §3.2 Multiple Links Configuration | 36 | 1.0（1.x: `[CR10-7s]`） | 在 GVSP 模式下支持多链路配置时，GVSP 通道所用的具体网络接口必须在 SCPx 寄存器中指定。 |
+| `CR-008cd` | CR | 设备 | §3.3.1 Network Interface | 37 | 2.0 | 若支持链路聚合配置，则无论静态还是动态 LAG 配置，设备都必须只允许一个聚合器（aggregator）。 |
+| `CO-009cd` | CO | 设备 | §3.3.1 Network Interface | 37 | 2.0 | 若支持链路聚合配置，聚合器应使用该 LAG 所关联的编号最小的物理网络接口的 MAC 地址。 |
+| `CR-010c` | CR | 应用+设备 | §3.3.2 GVCP Impacts | 37 | 2.0 | 若支持链路聚合，则每个 GVCP 通道（控制通道或消息通道）都视为一个会话（conversation）。 |
+| `CO-011st` | CO | 流发送端 | §3.3.3 GVSP Impacts | 38 | 2.0 | 若支持链路聚合，流通道的分发算法应在组成聚合组的所有链路之间采用轮询（round-robin）。 |
+| `CO-012cd` | CO | 设备 | §3.3.6 Events for LAG | 39 | 2.0 | 若支持链路聚合，设备应提供 GEV_EVENT_LINK_SPEED_CHANGE 事件，在聚合组内参与聚合的链路的聚合速率发生变化时触发。 |
+
+<a id="ch-4"></a>
+### Chapter 4. IP Configuration  ·  PART 1 - Device Discovery
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `R-013cd` | R | 设备 | §4 IP Configuration | 40 | 1.0（1.x: `[R3-1cd]`） | 所有设备都必须在上电、设备复位或以太网链路协商成功后执行 IP 配置。 |
+| `R-014cd` | R | 设备 | §4 IP Configuration | 40 | 1.0（1.x: `[R3-2cd]`） | 设备必须支持 DHCP（动态主机配置协议）和 LLA（链路本地地址）这两种 IP 配置协议。 |
+| `R-015cd` | R | 设备 | §4.1 Protocol Selection | 40 | 1.0（1.x: `[R3-5cd]`） | 设备执行 IP 配置协议的顺序必须为：① Persistent IP（若支持且已启用）→ ② DHCP（若已启用）→ ③ LLA。 |
+| `R-016cd` | R | 设备 | §4.1 Protocol Selection | 41 | 1.0（1.x: `[R3-6cd]`） | 设备的出厂默认设置必须为禁用 Persistent IP、启用 DHCP；LLA 始终启用。 |
+| `R-017cd` | R | 设备 | §4.1 Protocol Selection | 42 | 1.0（1.x: `[R3-7cd]`） | 设备获得有效 IP 地址后，必须将相关信息复制到接口 #0 的 bootstrap 寄存器：0x0024（原文写作 Persistent IP Address，该地址在寄存器表中为 Current IP Address）、Current Subnet Mask（0x0034）、Current Default Gateway（0x0044）。 |
+| `CR-018cd` | CR | 设备 | §4.2 Persistent IP | 42 | 1.0（1.x: `[CR3-8cd]`） | 若设备支持 Persistent IP，则必须通过相应的 bootstrap 寄存器实现，并必须提供非易失性存储器来保存这些设置。 |
+| `CR-019cd` | CR | 设备 | §4.2 Persistent IP | 43 | 1.0（1.x: `[CR3-9cd]`） | 若设备支持 Persistent IP，则各支持该功能的网络接口的 Persistent IP 地址、子网掩码和默认网关都必须存于非易失性存储器；应用一旦写入相应 Persistent IP 寄存器即立即保存。 |
+| `CR-020cd` | CR | 设备 | §4.2 Persistent IP | 43 | 2.1（1.x: `[CO3-11cd]`） | 若支持 Persistent IP，设备在使用该地址前必须按 RFC5227 用 ARP 探测地址冲突；若发现冲突则不得使用该地址，应向用户提示（如闪烁状态 LED），并必须转入下一种 IP 配置方案。 |
+| `R-021cd` | R | 设备 | §4.3 DHCP | 43 | 1.0（1.x: `[R3-12cd]`） | 设备必须支持 DHCP（参见 RFC2131 和 RFC2132）。 |
+| `O-022cd` | O | 设备 | §4.3 DHCP | 44 | 1.0（1.x: `[O3-13cd]`） | 设备应在非易失性存储中实现 DHCP 使能标志，指示下次复位时是否启用 DHCP；该标志属于 Network Interface Configuration 寄存器（每个网络接口一个）。 |
+| `CR-023cd` | CR | 设备 | §4.3 DHCP | 44 | 1.0（1.x: `[CR3-14cd]`） | 若支持 DHCP 使能标志且其值为 TRUE，设备必须尝试通过 DHCP 获取 IP 地址。 |
+| `CR-024cd` | CR | 设备 | §4.3 DHCP | 44 | 1.0（1.x: `[CR3-15cd]`） | 若支持 DHCP 使能标志且其值为 FALSE，设备必须不使用 DHCP，直接按协议选择流程图转入下一种 IP 配置协议。 |
+| `CR-025cd` | CR | 设备 | §4.3 DHCP | 44 | 1.0（1.x: `[CR3-16cd]`） | 若设备没有存放 DHCP 使能标志的非易失性存储，则必须视同 DHCP 已启用（该标志固定为 TRUE，用户不可配置）。 |
+| `O-026cd` | O | 设备 | §4.3 DHCP | 45 | 1.0（1.x: `[O3-18cd]`） | 设备应支持 RFC2132 中的 DHCP 选项：子网掩码选项（code 1，用于识别设备所属子网）和路由器选项（code 3，用于确定默认网关）。 |
+| `O-027cd` | O | 设备 | §4.3.1 DHCP Retransmission Strategy | 46 | 1.0（1.x: `[O3-19cd]`） | 设备的 DHCP 重传策略应为：首次发送后 2 秒内无服务器应答则第一次重传，再等 4 秒无应答则第二次重传，再等 6 秒仍无应答则按协议选择流程图转入下一种 IP 配置协议；各等待时间可选地叠加 −1～+1 秒的均匀随机数。 |
+| `R-028cd` | R | 设备 | §4.4 Link-Local Address | 47 | 1.0（1.x: `[R3-20cd]`） | 设备必须支持链路本地地址 LLA（详见 RFC3927）。 |
+| `R-029cd` | R | 设备 | §4.4 Link-Local Address | 47 | 1.0（1.x: `[R3-21cd]`） | 设备上的 LLA 必须始终处于启用状态，不能被禁用。 |
+
+<a id="ch-5"></a>
+### Chapter 5. Device Enumeration  ·  PART 1 - Device Discovery
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `R-030cd` | R | 设备 | §5.1 GVCP Device Discovery | 48 | 1.0（1.x: `[R4-1cd]`） | 设备完成 IP 配置后，只要拥有有效 IP 地址，就必须应答来自任何应用的设备发现请求。 |
+| `R-031cd` | R | 设备 | §5.1 GVCP Device Discovery | 48 | 1.0（1.x: `[R4-2cd]`） | 设备在完成 IP 配置之前不得应答设备发现请求。 |
+| `R-032cd` | R | 设备 | §5.1.1 Broadcast Device Discovery | 49 | 1.0（1.x: `[R4-5cd]`） | 在发现应答消息中，设备必须将源 IP 地址、子网掩码和默认网关设为 IP 配置过程中获得的值。 |
+| `R-033cd` | R | 设备 | §5.1.2 Unicast Device Discovery | 49 | 1.0（1.x: `[R4-6cd]`） | 对于单播设备发现消息，设备必须以单播应答消息回复该应用。 |
+| `O-034cd` | O | 设备 | §5.1.3 Associating the Device to the Enumeration List | 49 | 1.0（1.x: `[O4-7cd]`） | 为便于将设备与发现列表中的条目对应起来，设备外壳上应贴有序列号和 MAC 地址标签。 |
+| `O-035cd` | O | 设备 | §5.2.1 Multicast DNS (mDNS) | 52 | 2.0 | 设备应按 Multicast DNS 互联网草案实现 mDNS。 |
+| `O-036cd` | O | 设备 | §5.2.2 DNS Service Discovery (DNS-SD) | 52 | 2.0 | 设备应按 DNS-Based Service Discovery 互联网草案实现 DNS-SD。 |
+| `CR-037cd` | CR | 设备 | §5.2.2 DNS Service Discovery (DNS-SD) | 52 | 2.0 | 若支持 DNS-SD，则通过 DNS 引用的完全限定服务名必须为 "_gvcp._udp"。 |
+| `CR-038cd` | CR | 设备 | §5.2.2 DNS Service Discovery (DNS-SD) | 53 | 2.0 | 若支持 DNS-SD，其 TXT 记录必须至少支持规定的键：SpecVer、DevMode、MacAddr、Vendor、Model（必需），DevVer、VenSpecific（可选），SerialNum、UserDefName（设备支持时）。 |
+
+<a id="ch-6"></a>
+### Chapter 6. Device Attachment and Removal  ·  PART 1 - Device Discovery
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `O-039ca` | O | 应用 | §6 Device Attachment and Removal | 56 | 1.0（1.x: `[O5-1ca]`） | 应用应能动态响应设备网络拓扑的变化（网络中有设备加入或移除）。 |
+
+<a id="ch-8"></a>
+### Chapter 8. GVCP Transport Protocol Considerations  ·  PART 2 - GVCP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `R-040c` | R | 应用+设备 | §8 GVCP Transport Protocol Considerations | 60 | 1.0（1.x: `[R7-1c]`） | GVCP 必须以基于 IPv4 的 UDP 作为传输协议。 |
+| `R-041c` | R | 应用+设备 | §8 GVCP Transport Protocol Considerations | 60 | 1.0（1.x: `[R7-2c]`） | 设备和应用在承载 GVCP 的 IP 数据报中不得使用任何 IP 选项。 |
+| `R-042c` | R | 应用+设备 | §8.1 UDP | 60 | 1.0（1.x: `[R7-3c]`） | 设备的第一个 GVCP 端口必须使用 UDP 端口 3956。 |
+| `R-043c` | R | 应用+设备 | §8.1.1 Fragmentation | 60 | 1.0（1.x: `[R7-4c]`） | GVCP 中的每条命令消息和确认消息都必须各自完整地包含在单个数据包内。 |
+| `R-044c` | R | 应用+设备 | §8.1.1 Fragmentation | 61 | 1.0（1.x: `[R7-6c]`） | 应用和设备发送的 GVCP 数据包大小必须不超过 Control Channel Max Packet Size 字节（默认 576 字节）。 |
+| `R-045c` | R | 应用+设备 | §8.1.2 Packet Size Requirements | 61 | 1.0（1.x: `[R7-7c]`） | GVCP 负载（payload）的大小必须是 32 位的整数倍。 |
+| `O-046ca` | O | 应用 | §8.1.3 Reliability and Error Recovery | 62 | 1.0（1.x: `[O7-8ca]`） | 在请求确认的情况下，若应用在用户可配置的超时时间后仍未收到确认，应重新发送该命令。 |
+| `R-047ca` | R | 应用 | §8.1.3 Reliability and Error Recovery | 62 | 1.0（1.x: `[R7-9ca]`） | 应用重发命令时，必须保持 req_id 字段不变。 |
+| `O-048ca` | O | 应用 | §8.1.3 Reliability and Error Recovery | 62 | 1.0（1.x: `[O7-10ca]`） | 对于控制通道，应用应为 GVCP 消息提供用户可编程的超时值。 |
+| `O-049ca` | O | 应用 | §8.1.3 Reliability and Error Recovery | 62 | 1.0（1.x: `[O7-11ca]`） | 应用应为 GVCP 消息提供用户可编程的重试次数。 |
+| `R-050ca` | R | 应用 | §8.1.3 Reliability and Error Recovery | 63 | 1.0（1.x: `[R7-12ca]`） | 应用必须使 GVCP 消息的 req_id 字段逐条递增。 |
+| `R-051cd` | R | 设备 | §8.1.3 Reliability and Error Recovery | 63 | 1.0（1.x: `[R7-13cd]`） | 设备收到同一应用发来的相同 req_id 的命令时，若重复执行会产生不同效果，则必须不再执行该命令，只重新返回对应的确认消息。 |
+| `R-052cd` | R | 设备 | §8.1.3 Reliability and Error Recovery | 64 | 1.0（1.x: `[R7-14cd]`） | 凡请求了确认的命令，设备必须对收到的每一条（包括原始命令和重发命令）都返回确认。 |
+| `CR-053cd` | CR | 设备 | §8.1.4 Flow Control | 65 | 2.0 | 若设备支持 PAUSE 机制，其 PAUSE 配置必须在设备复位后保持；该配置可在 Network Interface Configuration 寄存器中查看。 |
+| `R-055ca` | R | 应用 | §8.1.5 End-to-End Connection | 65 | 1.0（1.x: `[R7-19ca]`） | 若应用没有发送任何 GVCP 消息，则必须确保向设备发送一条人为构造的 GVCP 消息，以复位设备的心跳计数器。 |
+
+<a id="ch-10"></a>
+### Chapter 10. Control Channel  ·  PART 2 - GVCP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `R-056cd` | R | 设备 | §10 Control Channel | 68 | 2.0 | IP 配置完成后，设备必须应答任何应用发来的设备发现请求，即使请求并非来自主应用。 |
+| `R-057cd` | R | 设备 | §10 Control Channel | 68 | 1.0（1.x: `[R9-1cd]`） | 设备必须支持一个主控制通道（primary control channel）。 |
+| `R-058ca` | R | 应用 | §10 Control Channel | 68 | 1.0（1.x: `[R8-3ca]`） | 应用必须先建立（实例化）控制通道，才能访问设备寄存器。 |
+| `O-059cd` | O | 设备 | §10 Control Channel | 69 | 1.0（1.x: `[O9-2cd]`） | 若命令请求了确认，设备应在执行完该命令所要求的即时动作后立即返回确认。 |
+| `R-060ca` | R | 应用 | §10 Control Channel | 69 | 1.0（1.x: `[R9-3ca]`） | 应用在收到上一条命令的确认之前不得发送下一条命令；仅 DISCOVERY_CMD、PACKETRESEND_CMD、传输超时后的重试包以及未请求确认的情况除外。 |
+| `R-061cd` | R | 设备 | §10.1 Control Channel Privileges | 69 | 1.0（1.x: `[R9-4cd]`） | 设备必须支持独占访问（exclusive access）。 |
+| `R-062cd` | R | 设备 | §10.1 Control Channel Privileges | 69 | 1.0（1.x: `[R9-5cd]`） | 当某应用拥有独占访问时，设备不得允许次应用（secondary application）建立次控制通道。 |
+| `R-063cd` | R | 设备 | §10.1 Control Channel Privileges | 69 | 1.0（1.x: `[R9-6cd]`） | 设备已授予独占访问时，对其他应用发来的命令必须在确认消息中返回 GEV_STATUS_ACCESS_DENIED；ACTION_CMD、DISCOVERY_CMD、PACKETRESEND_CMD 和 FORCEIP_CMD 除外（FORCEIP_CMD 须遵守 [R-150cd]）。 |
+| `CO-064cd` | CO | 设备 | §10.1 Control Channel Privileges | 70 | 1.0（1.x: `[CO9-7cd]`） | 若设备支持控制访问（control access）且某应用已持有控制访问，设备应允许次应用建立支持 READREG 和 READMEM 消息的控制通道。 |
+| `CR-065cd` | CR | 设备 | §10.1 Control Channel Privileges | 70 | 1.0（1.x: `[CR9-8cd]`） | 支持控制访问的设备，在没有应用持有独占或控制访问时可授予控制访问；若现有应用持有启用 switchover 的控制访问，新应用请求时写入 CCP 的 control_switchover_key 等于 Control Switchover Key bootstrap 寄存器的值即可获权；否则设备必须返回 GEV_STATUS_ACCESS_DENIED。 |
+| `CO-066cd` | CO | 设备 | §10.1 Control Channel Privileges | 71 | 1.2（1.x: `[CO9-17cd]`） | 若设备支持启用 switchover 的控制访问，且某应用已持有启用 switchover 的控制访问，设备应允许次应用建立支持 READREG 和 READMEM 消息的控制通道。 |
+| `CR-067cd` | CR | 设备 | §10.1 Control Channel Privileges | 71 | 1.2（1.x: `[CR9-18cd]`） | 支持启用 switchover 的控制访问的设备，在没有应用持有独占或控制访问时可授予控制访问；若现有应用持有启用 switchover 的控制访问，新应用请求时写入 CCP 的 control_switchover_key 等于 Control Switchover Key bootstrap 寄存器的值即可获权；否则设备必须返回 GEV_STATUS_ACCESS_DENIED。 |
+| `R-068cd` | R | 设备 | §10.1 Control Channel Privileges | 72 | 1.0（1.x: `[R9-9cd]`） | 设备必须记住主应用的上下文，至少包括：应用的 IP 地址、应用的源 UDP 端口，以及所授予的权限（独占、控制访问或启用 switchover 的控制访问）。 |
+| `R-069cd` | R | 设备 | §10.3 Opening a Control Channel | 73 | 1.0（1.x: `[R9-10cd]`） | 主应用可在不关闭控制通道的情况下再次请求相同权限，此时设备必须接受该请求并返回 GEV_STATUS_SUCCESS。 |
+| `R-070cd` | R | 设备 | §10.3 Opening a Control Channel | 73 | 1.0（1.x: `[R9-11cd]`） | 设备必须允许应用无需先断开控制通道，即可在 Exclusive、Control 与 Control with Switchover Enabled（若支持）权限之间直接切换。 |
+| `R-071ca` | R | 应用 | §10.4 Closing a Control Channel | 74 | 1.0（1.x: `[R27-30ca]`） | 主应用必须向 CCP 寄存器写 0 来释放其权限。 |
+| `R-072cd` | R | 设备 | §10.4 Closing a Control Channel | 74 | 1.0（1.x: `[R9-12cd]`） | 主控制通道关闭时，设备必须停止采集并中止所有流（除非已通过 GVSP Stream Channel Configuration 寄存器的 unconditional streaming enabled 位另行配置），并复位所有连接状态：至少清零 Message Channel Port 寄存器与 GVSP 发送端的 SCPx，清除 GVRSP 发送端 RSCCTLx 的 stream_enable 位并断开已打开的 QP，复位 Primary Application Port 与 Primary Application IP Address 寄存器（若支持），随后可接受新的连接；完成后设备寄存器（含 bootstrap 寄存器）必须反映新状态。 |
+| `O-073ca` | O | 应用 | §10.5 Control Channel Heartbeat | 75 | 1.0（1.x: `[O9-13ca]`） | 应用应提供一个用于配置心跳频率的参数。 |
+| `R-074cd` | R | 设备 | §10.5 Control Channel Heartbeat | 75 | 1.0（1.x: `[R9-14cd]`） | 设备必须提供一个用于控制心跳超时的 bootstrap 寄存器。 |
+| `R-075cd` | R | 设备 | §10.5 Control Channel Heartbeat | 75 | 1.0（1.x: `[R9-15cd]`） | 主应用发出的任何有效 GVCP 命令都必须复位设备的心跳计数器，但 PACKETRESEND_CMD、DISCOVERY_CMD、ACTION_CMD 和 FORCEIP_CMD 除外（FORCEIP_CMD 须遵守 [R-150cd]）。 |
+| `R-076cd` | R | 设备 | §10.5 Control Channel Heartbeat | 75 | 1.0（1.x: `[R9-16cd]`） | 若设备超过 bootstrap 寄存器中用户可编程的时长（默认 3 秒）未收到控制消息，且未禁用心跳功能（GVCP Configuration 寄存器 bit 31），则必须按上一节所述关闭控制通道。 |
+| `R-077cd` | R | 设备 | §10.7 Use of Pending Acknowledge | 79 | 2.0 | 在设备已发出 PENDING_ACK 而尚未发送该命令最终 ACK 的期间，设备仍必须应答 DISCOVERY_CMD 消息。 |
+| `R-078cd` | R | 设备 | §10.7 Use of Pending Acknowledge | 80 | 2.0 | 设备不得使用 PENDING_ACK 来应答 DISCOVERY_CMD。 |
+
+<a id="ch-11"></a>
+### Chapter 11. Stream Channel  ·  PART 2 - GVCP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `R-079s` | R | 流收发两端 | §11 Stream Channel | 81 | 1.0（1.x: `[R8-1s]`） | 支持流传输的产品必须提供至少 1 个、至多 512 个流通道。 |
+| `R-080s` | R | 流收发两端 | §11 Stream Channel | 81 | 1.0（1.x: `[R10-2s]`） | 支持流传输的产品必须从索引 0 开始连续地支持流通道，所支持的流通道索引之间不得有空缺。 |
+| `R-615ca` | R | 应用 | §11.1 Stream Channel Protocol Support | 82 | 3.0 | 接收端必须同时支持 GVSP 和 GVRSP；能否以 GVRSP 模式运行可能受主机操作系统和网卡硬件的限制。 |
+| `O-086st` | O | 流发送端 | §11.5 Opening a GVSP Stream Channel | 83 | 1.0（1.x: `[O10-3st]`） | GVSP 发送端应使用任意动态端口号作为该流通道的 UDP 源端口。 |
+| `R-087ca` | R | 应用 | §11.5 Opening a GVSP Stream Channel | 83 | 1.0（1.x: `[R27-36ca]`） | 应用必须通过向 SCPx 寄存器的 host_port 字段写入非 0 值来激活 GVSP 流通道；否则该通道处于关闭状态。 |
+| `CR-089cd` | CR | 设备 | §11.6 Operation of the GVSP Stream Channel | 84 | 1.1（1.x: `[CR27-45cd]`） | 若设备支持 SCSPx，则当 SCPx 非 0 时 SCSPx 必须返回非 0 值，即 GVSP 发送端流通道的 UDP 源端口；此前也可为非 0，但之后在整个控制会话期间须保持不变。 |
+| `CR-090cd` | CR | 设备 | §11.6 Operation of the GVSP Stream Channel | 84 | 1.1（1.x: `[CR27-46cd]`） | 若设备支持 SCSPx，当 SCPx 非 0 时，对于来自 SCDAx 与 SCPx 所列地址/端口组合（若 GVSP 流通道已打开）、发往设备 SCSPx 端口的任何 UDP 流量，设备必须静默忽略。 |
+| `R-567s` | R | 流收发两端 | §11.7 Packet Size Negotiation of the GVSP Stream | 85 | 2.1 | 通过 SCPSx 寄存器进行的包大小协商必须在 GVSP 流通道打开之后、正式流传输开始之前进行。 |
+| `R-093st` | R | 流发送端 | §11.7 Packet Size Negotiation of the GVSP Stream | 85 | 1.0（1.x: `[R10-6st]`） | 若 GVSP 发送端不支持 SCPSx 中请求的包大小，则在被要求发送测试包时不得发送。 |
+| `R-091ca` | R | 应用 | §11.8 Closing a GVSP Stream Channel | 85 | 1.0（1.x: `[R10-4ca]`） | 主应用必须通过向 SCPx 寄存器写 0 来关闭 GVSP 流通道。 |
+| `R-092st` | R | 流发送端 | §11.8 Closing a GVSP Stream Channel | 85 | 1.0（1.x: `[R10-5st]`） | GVSP 发送端不得发送不完整的流数据包。 |
+| `CR-094st` | CR | 流发送端 | §11.11 Traversing Firewalls or Network Address Translation Devices | 86 | 1.1（1.x: `[CR10-8st]`） | 若产品对某一 GVSP 发送端支持 SCSPx，则必须对其所有 GVSP 发送端流通道都支持 SCSPx。 |
+| `CR-095ca` | CR | 应用 | §11.11 Traversing Firewalls or Network Address Translation Devices | 87 | 1.1（1.x: `[CR10-9ca]`） | 若应用支持 SCSPx，则除非已打开该流通道并成功从 SCSPx 读回非 0 值，否则不得向 SCSPx 指定的端口发送数据包。 |
+| `CR-616cd` | CR | 设备 | §11.13 Unconditional Streaming | 88 | 3.0 | 若设备仅支持 GVRSP 流（Streaming Capability 寄存器的 gvsp_mode_not_supported 位与 gvrsp_mode_supported 位均置位），则不得置位 GVSP Stream Channel Capability 寄存器的 unconditional_streaming_supported 位。 |
+
+<a id="ch-12"></a>
+### Chapter 12. Message Channel  ·  PART 2 - GVCP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `R-096cd` | R | 设备 | §12 Message Channel | 89 | 1.0（1.x: `[R8-2cd]`） | 设备必须提供一个或零个消息通道（即事件生成器）。 |
+| `CR-097cd` | CR | 设备 | §12 Message Channel | 89 | 1.0（1.x: `[CR11-1cd]`） | 若设备支持消息通道，消息通道上的 req_id 必须逐条递增（重传除外）；回绕时须跳过 0（0 为无效值），即 65535 之后为 1。 |
+| `CO-098cd` | CO | 设备 | §12.2 Opening the Message Channel | 90 | 1.0（1.x: `[CO11-2cd]`） | 若设备支持消息通道，应使用任意动态端口号作为消息通道的 UDP 源端口。 |
+| `CR-099ca` | CR | 应用 | §12.2 Opening the Message Channel | 90 | 1.0（1.x: `[CR27-31ca]`） | 支持消息通道时，应用必须通过向 MCP 寄存器的 host_port 字段写入非 0 值来激活消息通道；否则通道处于关闭状态。 |
+| `CR-100ca` | CR | 应用 | §12.2 Opening the Message Channel | 90 | 1.1（1.x: `[CR11-7ca]`） | 若应用支持消息通道，当消息请求确认时，应用必须以所收数据包的 UDP 源端口作为确认包的 UDP 目的端口进行确认。 |
+| `CR-101cd` | CR | 设备 | §12.3 Operation of the Message Channel | 90 | 1.0（1.x: `[CR27-33cd]`） | 支持消息通道时，若超时未获确认，设备必须重发同一消息，重试次数由 MCRC 寄存器指定。 |
+| `CR-102cd` | CR | 设备 | §12.3 Operation of the Message Channel | 90 | 1.0（1.x: `[CR27-35cd]`） | 支持消息通道时，若 MCRC 设为 0，设备不得重传消息。 |
+| `CR-103cd` | CR | 设备 | §12.3 Operation of the Message Channel | 90 | 1.0（1.x: `[CR27-34cd]`） | 支持消息通道时，若 MCTT 非 0，命令头的 ACKNOWLEDGE 位必须置位；将 MCTT 设为 0 即禁用确认，此时设备必须清除命令头的 ACKNOWLEDGE 位。 |
+| `CR-104cd` | CR | 设备 | §12.3 Operation of the Message Channel | 90 | 1.1（1.x: `[CR27-43cd]`） | 若设备支持 MCSP，则当 MCP 非 0 时 MCSP 必须返回非 0 值，即消息通道的 UDP 源端口；此前也可为非 0，但之后在整个控制会话期间须保持不变。 |
+| `CR-105cd` | CR | 设备 | §12.3 Operation of the Message Channel | 90 | 1.1（1.x: `[CR27-44cd]`） | 若设备支持 MCSP，当 MCSP 非 0 时，对于来自 MCDA 与 MCP 所列地址/端口组合（若消息通道已打开）、发往设备 MCSP 端口且不是 EVENT_ACK 或 EVENTDATA_ACK 的 UDP 流量，设备必须静默忽略。 |
+| `CR-106ca` | CR | 应用 | §12.4 Closing the Message Channel | 91 | 1.0（1.x: `[CR11-3ca]`） | 支持消息通道时，主应用必须通过向 MCP 寄存器写 0 来关闭消息通道。 |
+| `CR-107cd` | CR | 设备 | §12.4 Closing the Message Channel | 91 | 1.0（1.x: `[CR11-4cd]`） | 支持消息通道时，若关闭消息通道之际设备正在发送某个数据包，则该消息必须完整发送完毕。 |
+| `CR-108ca` | CR | 应用 | §12.4 Closing the Message Channel | 91 | 1.0（1.x: `[CR11-5ca]`） | 支持消息通道时，若应用在其消息通道已关闭时收到消息，必须将其静默丢弃。 |
+| `CR-109cd` | CR | 设备 | §12.5 Multicasting | 91 | 1.0（1.x: `[CR11-6cd]`） | 支持消息通道时，若以组播发送事件消息，则不允许确认包，设备必须清除消息的 acknowledge 位。 |
+| `CR-110ca` | CR | 应用 | §12.6 Traversing Firewalls or Network Address Translation Device | 92 | 1.1（1.x: `[CR11-8ca]`） | 若应用支持 MCSP，则除非已打开消息通道并成功从 MCSP 读回非 0 值，否则不得向 MCSP 指定的端口发送数据包。 |
+
+<a id="ch-13"></a>
+### Chapter 13. Device with Multiple Network Interfaces  ·  PART 2 - GVCP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `R-111c` | R | 应用+设备 | §13.1 Impact on Control Channel | 93 | 1.0（1.x: `[R12-6c]`） | 控制通道必须始终建立在接口 #0 上，应用必须通过设备的该接口取得设备控制权。 |
+| `R-112cd` | R | 设备 | §13.1 Impact on Control Channel | 93 | 1.0（1.x: `[R12-7cd]`） | 设备有多个网络接口时，不得应答从接口 #0 以外的接口收到的 GVCP 请求，此类消息被静默丢弃。 |
+| `R-113st` | R | 流发送端 | §13.2 Impact on Stream Channels | 93 | 1.0（1.x: `[R12-8st]`） | GVSP 发送端在某流通道上传输数据时，必须使用对应 SCPx 寄存器 network_interface_index 字段指定的网络接口。 |
+| `CR-114sr` | CR | 流接收端 | §13.2 Impact on Stream Channels | 93 | 1.2（1.x: `[CR12-11sr]`） | 若 GVSP 接收端是设备，则在某流通道上接收数据时，必须使用对应 SCPx 寄存器 network_interface_index 字段指定的网络接口。 |
+| `R-115ca` | R | 应用 | §13.2 Impact on Stream Channels | 93 | 1.0（1.x: `[R12-9ca]`） | 应用必须在接口 #0（唯一支持 GVCP 的接口）上发送 PACKETRESEND_CMD；设备根据映射到 SCPx 的 stream_channel_index 字段确定在哪个网络接口上重发数据包。 |
+| `CR-116c` | CR | 应用+设备 | §13.3 Impact on Message Channel | 93 | 1.0（1.x: `[CR12-10c]`） | 若支持消息通道，则必须在接口 #0 上建立该通道。 |
+
+<a id="ch-14"></a>
+### Chapter 14. Additional Concepts  ·  PART 2 - GVCP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `R-117cd` | R | 设备 | §14.1 Retrieving the XML Device Description File | 94 | 1.0（1.x: `[R17-1cd]`） | GigE Vision 设备必须具备 XML 设备描述文件，其语法遵循 GenICam 标准 GenApi 模块的规定。 |
+| `R-532cd` | R | 设备 | §14.1 Retrieving the XML Device Description File | 94 | 2.1 | XML 设备描述文件的内容一旦改变，其文件名也必须随之改变。 |
+| `O-533cd` | O | 设备 | §14.1 Retrieving the XML Device Description File | 94 | 2.1 | 设备应对其 XML 设备描述文件进行 ZIP 压缩。 |
+| `CR-534cd` | CR | 设备 | §14.1 Retrieving the XML Device Description File | 94 | 2.1 | 若设备用 ZIP 文件存放 XML 设备描述文件，则该 XML 必须是 ZIP 包内（按存储顺序）的第一个文件。 |
+| `R-118ca` | R | 应用 | §14.1 Retrieving the XML Device Description File | 95 | 1.0（1.x: `[R17-3ca]`） | 应用必须同时支持未压缩的 XML 文件（扩展名 .XML）和 ZIP 压缩文件（扩展名 .zip，XML 须为包内按存储顺序的第一个文件，仅允许 DEFLATE 和 STORE 压缩方法）；下载后由应用自行解压。 |
+| `R-119cd` | R | 设备 | §14.1 Retrieving the XML Device Description File | 95 | 1.0（1.x: `[R17-5cd]`） | 设备必须将 XML 文件的起始位置对齐到 32 位边界，以便通过 READMEM 读取。 |
+| `O-120ca` | O | 应用 | §14.1.1 Device Non-Volatile Memory | 96 | 1.0（1.x: `[O17-6ca]`） | 当 XML 设备描述文件存放在设备本地时，应用应使用 GVCP 的 READMEM 消息读取。 |
+| `R-121ca` | R | 应用 | §14.1.4 Manifest Table | 98 | 1.0（1.x: `[R17-4ca]`） | 若设备不支持 Manifest Table，应用必须改用 First URL 与 Second URL 寄存器定位 XML 描述文件：先尝试第一个 URL，失败后再使用第二个。 |
+| `R-122ca` | R | 应用 | §14.1.4 Manifest Table | 98 | 2.0 | 若设备提供 Manifest Table，应用必须优先通过 Manifest Table 获取 XML 设备描述文件，而非使用 First URL/Second URL bootstrap 寄存器。 |
+| `CR-123cd` | CR | 设备 | §14.2.2 Timestamp Synchronization | 100 | 2.0 | 若设备支持 IEEE 1588，其 Timestamp Tick Frequency bootstrap 寄存器必须固定为 1 000 000 000（即 1 GHz）。 |
+| `CR-124cd` | CR | 设备 | §14.2.2 Timestamp Synchronization | 100 | 2.0 | 若设备支持 IEEE 1588，在以受调节（disciplined）时钟运行时必须禁用 Timestamp Control 寄存器的复位功能；应用写该寄存器试图复位时间戳时，设备必须返回 GEV_STATUS_WRITE_PROTECT。 |
+| `CR-125c` | CR | 应用+设备 | §14.2.2 Timestamp Synchronization | 101 | 2.0 | 凡在 IEEE 1588-2008 与 GigE Vision 之间传递时间信息的实现（应用和设备），都必须使用公式 14-1 与 14-2 进行时间格式转换。 |
+| `CR-126c` | CR | 应用+设备 | §14.2.4 IEEE 1588 Profiles | 102 | 2.0 | 若 GigE Vision 设备或应用支持 IEEE 1588，则必须支持表 14-1 所定义的 profile 之一。 |
+| `CR-127cd` | CR | 设备 | §14.3.1 Scheduled Action Commands | 105 | 2.0 | 若设备支持 Scheduled Action Commands，当其队列已满又收到新的 ACTION_CMD 时，必须返回状态码为 GEV_STATUS_OVERFLOW 的 ACTION_ACK，且不得将该请求入队。 |
+| `CR-128cd` | CR | 设备 | §14.3.1 Scheduled Action Commands | 106 | 2.0 | 若设备支持 Scheduled Action Commands，当参考时间未与任何主时钟同步时，必须返回状态码为 GEV_STATUS_NO_REF_TIME 的 ACTION_ACK，且不得将该请求入队。 |
+
+<a id="ch-15"></a>
+### Chapter 15. GVCP Headers  ·  PART 2 - GVCP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `R-129c` | R | 应用+设备 | §15.1 Command Header | 112 | 1.0（1.x: `[R13-1c]`） | 命令头（command header）必须遵循图 15-1 所示的布局。 |
+| `O-130c` | O | 应用+设备 | §15.1 Command Header | 112 | 1.0（1.x: `[O13-2c]`） | 命令消息的接收方应对命令头做最基本的校验，即检查数据包首字节是否为键值 0x42；不含该键的数据包不视为 GVCP 消息。 |
+| `R-131c` | R | 应用+设备 | §15.1 Command Header | 112 | 1.0（1.x: `[R13-3c]`） | 若消息不是 GVCP 消息，则必须将其静默丢弃。 |
+| `R-132c` | R | 应用+设备 | §15.1 Command Header | 112 | 1.0（1.x: `[R13-4c]`） | 若接收方不支持 command 字段所请求的命令，且对方请求了确认，接收方应返回 GEV_STATUS_NOT_IMPLEMENTED 状态码。 |
+| `R-133c` | R | 应用+设备 | §15.1 Command Header | 112 | 2.0 | GVCP 报文中的保留字段在发送时必须置 0，接收时必须忽略。 |
+| `O-134c` | O | 应用+设备 | §15.1 Command Header | 112 | 1.0（1.x: `[O13-5c]`） | 若命令报文头的其他任一字段无效，接收方应返回 GEV_STATUS_INVALID_HEADER 状态码。 |
+| `R-135c` | R | 应用+设备 | §15.2 Acknowledge Header | 114 | 1.0（1.x: `[R13-6c]`） | 确认（ACK）报文头必须遵循图 15-2 的布局。 |
+| `O-136c` | O | 应用+设备 | §15.2 Acknowledge Header | 114 | 1.0（1.x: `[O13-7c]`） | 确认报文的接收方应对确认报文头做最基本的校验：至少核对 ack_id 是否与先前发送的 req_id 一致，也可校验 acknowledge 字段是否为本规范所列的取值。 |
+| `R-137c` | R | 应用+设备 | §15.3 Byte Sequencing | 115 | 1.0（1.x: `[R13-9c]`） | GVCP 必须使用网络字节序（即大端序 big-endian）。 |
+
+<a id="ch-16"></a>
+### Chapter 16. Control Channel Dictionary  ·  PART 2 - GVCP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `R-138cd` | R | 设备 | §16 Control Channel Dictionary | 119 | 1.0（1.x: `[R14-1cd]`） | 若控制报文的请求方不具备所需权限，设备必须在确认报文的 status 字段返回 GEV_STATUS_ACCESS_DENIED，并将 length 字段置 0（确认报文只含报文头）。 |
+| `R-139cd` | R | 设备 | §16.1 DISCOVERY | 119 | 1.0（1.x: `[R14-2cd]`） | 所有设备都必须支持 DISCOVERY 命令。 |
+| `R-140c` | R | 应用+设备 | §16.1.1 DISCOVERY_CMD | 119 | 1.0（1.x: `[R14-3c]`） | DISCOVERY_CMD 必须遵循图 16-1 的报文布局。 |
+| `R-141ca` | R | 应用 | §16.1.1 DISCOVERY_CMD | 120 | 1.1（1.x: `[R14-62ca]`） | 应用发送 DISCOVERY_CMD 时，必须置位 flag 字段的 ACKNOWLEDGE 位（bit 7）。 |
+| `R-142cd` | R | 设备 | §16.1.2 DISCOVERY_ACK | 120 | 1.0（1.x: `[R14-5cd]`） | 若设备与应用位于同一子网，设备必须以单播方式发送 DISCOVERY_ACK。 |
+| `O-143cd` | O | 设备 | §16.1.2 DISCOVERY_ACK | 120 | 2.0 | 同时满足以下两个条件时，设备应以广播方式发送 DISCOVERY_ACK：① 该 DISCOVERY_CMD 不是在设备所在子网上收到的；② 应用置位了 DISCOVERY_CMD flag 字段的 bit 3。 |
+| `O-144cd` | O | 设备 | §16.1.2 DISCOVERY_ACK | 121 | 1.0（1.x: `[O14-6cd]`） | 发送 DISCOVERY_ACK 前，设备应等待一段均匀分布的随机延时：若支持 Discovery ACK Delay 引导寄存器，范围为 0 至该寄存器值；否则为 0 至 1 秒。 |
+| `R-145c` | R | 应用+设备 | §16.1.2 DISCOVERY_ACK | 121 | 1.0（1.x: `[R14-7c]`） | DISCOVERY_ACK 必须遵循图 16-2 的报文布局。 |
+| `R-146cd` | R | 设备 | §16.1.2 DISCOVERY_ACK | 123 | 1.0（1.x: `[R14-8cd]`） | 处理 DISCOVERY_CMD 出错时，设备必须在 DISCOVERY_ACK 头中填入相应状态码作答，此时 length 字段须置 0，确认报文只含报文头。 |
+| `R-147cd` | R | 设备 | §16.2 FORCEIP | 123 | 1.0（1.x: `[R14-9cd]`） | 所有设备都必须支持 FORCEIP 命令。 |
+| `R-148ca` | R | 应用 | §16.2.1 FORCEIP_CMD | 123 | 1.0（1.x: `[CR14-10ca]`） | 使用 FORCEIP_CMD 时，应用必须在 GVCP 端口上以广播方式发送，且命令中必须包含目标设备的 MAC 地址。 |
+| `R-149cd` | R | 设备 | §16.2.1 FORCEIP_CMD | 123 | 1.0（1.x: `[R14-11cd]`） | 若 FORCEIP_CMD 的 MAC_address 字段与本设备 MAC 地址不匹配，设备必须静默丢弃该报文。 |
+| `R-604cd` | R | 设备 | §16.2.1 FORCEIP_CMD | 123 | 3.0 | FORCEIP_CMD 不得修改任何 Persistent IP（持久 IP）配置。 |
+| `R-150cd` | R | 设备 | §16.2.1 FORCEIP_CMD | 123 | 1.0（1.x: `[R14-12cd]`） | 设备必须仅在没有任何应用持有独占访问或控制访问（无论是否启用 switchover）时处理 FORCEIP_CMD，否则必须静默丢弃该请求。 |
+| `R-151cd` | R | 设备 | §16.2.1 FORCEIP_CMD | 124 | 1.0（1.x: `[R14-13cd]`） | 若 FORCEIP_CMD 的 static_IP 字段为 0，设备必须先关闭所有已打开的 GVSP/GVRSP 流通道（如适用，含断开 GVRSP 流通道的 QP）和消息通道，再在所有网络接口上重新启动 IP 配置流程，且不向应用回送 FORCEIP_ACK。 |
+| `R-152cd` | R | 设备 | §16.2.1 FORCEIP_CMD | 124 | 1.0（1.x: `[R14-14cd]`） | 若 FORCEIP_CMD 的 static_IP 字段非 0，设备必须将 IP 地址改为该值，并仅在新静态 IP 生效后才回送 FORCEIP_ACK（若有请求）；若设置静态 IP 需复位通信栈和内部状态，复位后必须保持该静态 IP。 |
+| `O-572cd` | O | 设备 | §16.2.1 FORCEIP_CMD | 124 | 2.1 | 设备在使用 static_IP 前应按 RFC5227 用 ARP 探测，以发现潜在地址冲突；若检测到冲突，设备不得使用该 IP，并应向用户提示（如闪烁状态 LED，提示方式由实现自定）。 |
+| `R-153cd` | R | 设备 | §16.2.1 FORCEIP_CMD | 124 | 1.0（1.x: `[R14-15cd]`） | FORCEIP_CMD 必须遵循图 16-3 的报文布局。 |
+| `CR-154ca` | CR | 应用 | §16.2.1 FORCEIP_CMD | 124 | 1.1（1.x: `[CR14-76ca]`） | 若应用支持 FORCEIP_CMD，则该命令必须遵循图 16-3 的报文布局。 |
+| `O-155cd` | O | 设备 | §16.2.2 FORCEIP_ACK | 126 | 2.0 | 若应用置位了 FORCEIP_CMD flag 字段的 bit 3，设备应以广播方式发送 FORCEIP_ACK。 |
+| `R-156cd` | R | 设备 | §16.2.2 FORCEIP_ACK | 126 | 1.0（1.x: `[R14-16cd]`） | FORCEIP_ACK 必须遵循图 16-4 的报文布局。 |
+| `R-157cd` | R | 设备 | §16.3 READREG | 126 | 1.0（1.x: `[R14-17cd]`） | 所有设备都必须支持 READREG 命令。 |
+| `R-158cd` | R | 设备 | §16.3 READREG | 127 | 1.0（1.x: `[R14-18cd]`） | 设备必须提供能力标志（GVCP Capability 寄存器 0x0934 的 bit 31），指示是否支持在一条命令中串联多个寄存器读操作。 |
+| `R-535ca` | R | 应用 | §16.3 READREG | 127 | 2.1 | 当 GVCP Capability 寄存器（0x0934）的 bit 31 为 0 时，应用不得向设备发送串联多个读操作的 READREG 命令。 |
+| `CR-159cd` | CR | 设备 | §16.3 READREG | 127 | 1.0（1.x: `[CR14-19cd]`） | 若支持串联且命令中指定了多个寄存器读，设备必须按顺序依次执行。 |
+| `CR-160cd` | CR | 设备 | §16.3 READREG | 127 | 1.0（1.x: `[CR14-20cd]`） | 支持串联时，若读操作出错，设备必须在出错位置停止寄存器读取，丢弃剩余读操作，并在确认报文中返回相应错误码。 |
+| `R-161cd` | R | 设备 | §16.3 READREG | 127 | 1.0（1.x: `[R14-21cd]`） | 若没有应用持有独占访问，设备必须响应来自主应用或任何次级应用的 READREG 报文。 |
+| `R-162cd` | R | 设备 | §16.3 READREG | 127 | 1.0（1.x: `[R14-22cd]`） | 若有应用持有独占访问，设备必须只响应主应用的 READREG 报文；次级应用的 READREG 以 GEV_STATUS_ACCESS_DENIED 状态码确认，且 length 置 0（无数据负载）。 |
+| `R-163c` | R | 应用+设备 | §16.3.1 READREG_CMD | 127 | 1.0（1.x: `[R14-23c]`） | READREG_CMD 必须遵循图 16-5 的报文布局。 |
+| `R-164c` | R | 应用+设备 | §16.3.2 READREG_ACK | 128 | 1.0（1.x: `[R14-24c]`） | READREG_ACK 必须遵循图 16-6 的报文布局。 |
+| `R-165cd` | R | 设备 | §16.3.2 READREG_ACK | 129 | 1.0（1.x: `[R14-25cd]`） | READREG_ACK 的报文长度（length）必须反映成功读取的字节数，且必须是 4 字节的整数倍。 |
+| `R-166cd` | R | 设备 | §16.4 WRITEREG | 129 | 1.0（1.x: `[R14-26cd]`） | 所有设备都必须支持 WRITEREG 命令。 |
+| `R-167cd` | R | 设备 | §16.4 WRITEREG | 129 | 1.0（1.x: `[R14-27cd]`） | 设备必须提供能力标志（GVCP Capability 寄存器 0x0934 的 bit 31），指示是否支持在一条命令中串联多个写操作。 |
+| `R-536ca` | R | 应用 | §16.4 WRITEREG | 129 | 2.1 | 当 GVCP Capability 寄存器（0x0934）的 bit 31 为 0 时，应用不得向设备发送串联多个写操作的 WRITEREG 命令。 |
+| `CR-168cd` | CR | 设备 | §16.4 WRITEREG | 129 | 1.0（1.x: `[CR14-28cd]`） | 若支持串联且命令中指定了多个寄存器写，设备必须按顺序依次执行。 |
+| `CR-169cd` | CR | 设备 | §16.4 WRITEREG | 129 | 1.0（1.x: `[CR14-29cd]`） | 支持串联时，若写操作出错，设备必须在出错位置停止写入并丢弃剩余写操作，在确认报文中返回相应错误码及失败写操作在命令列表中的索引（从 0 起算）。 |
+| `R-170cd` | R | 设备 | §16.4 WRITEREG | 130 | 1.0（1.x: `[R14-30cd]`） | 设备必须响应来自主应用的 WRITEREG 报文。 |
+| `R-171cd` | R | 设备 | §16.4 WRITEREG | 130 | 1.0（1.x: `[R14-31cd]`） | 任何次级应用试图执行 WRITEREG 时，设备必须返回 GEV_STATUS_ACCESS_DENIED；例外：设备处于启用 switchover 的控制访问状态，且另一持有正确凭据的应用请求接管控制权。 |
+| `R-172cd` | R | 设备 | §16.4 WRITEREG | 130 | 1.0（1.x: `[R14-32cd]`） | 尚无主应用注册时，设备必须接受任何应用发来的访问 CCP 寄存器的 WRITEREG_CMD，以便为主应用建立控制通道。 |
+| `R-173c` | R | 应用+设备 | §16.4.1 WRITEREG_CMD | 130 | 1.0（1.x: `[R14-33c]`） | WRITEREG_CMD 必须遵循图 16-7 的报文布局。 |
+| `R-174c` | R | 应用+设备 | §16.4.2 WRITEREG_ACK | 131 | 1.0（1.x: `[R14-34c]`） | WRITEREG_ACK 必须遵循图 16-8 的报文布局。 |
+| `R-175cd` | R | 设备 | §16.4.2 WRITEREG_ACK | 131 | 1.0（1.x: `[R14-35cd]`） | WRITEREG 失败时，设备必须在确认报文的 status 字段中填入表明失败原因的相应状态码。 |
+| `R-537cd` | R | 设备 | §16.4.2 WRITEREG_ACK | 131 | 2.1 | 收到要求复位设备的寄存器访问（如 GenICam SFNC 的 DeviceReset）时，设备必须先发出 WRITEREG_ACK（若 WRITEREG_CMD 请求了确认），并确保该包已发回应用后再执行实际复位。 |
+| `R-176cd` | R | 设备 | §16.5 READMEM | 132 | 1.0（1.x: `[R14-36cd]`） | 所有设备都必须支持 READMEM 命令。 |
+| `R-177c` | R | 应用+设备 | §16.5 READMEM | 132 | 1.0（1.x: `[R14-37c]`） | READMEM 命令读取的字节（8 位单元）数必须是 4 的整数倍。 |
+| `R-178cd` | R | 设备 | §16.5 READMEM | 132 | 2.0 | 若 READMEM 命令要读取的字节数不是 4 的整数倍，设备必须返回 GEV_STATUS_BAD_ALIGNMENT。 |
+| `R-179c` | R | 应用+设备 | §16.5 READMEM | 132 | 1.0（1.x: `[R14-38c]`） | READMEM 命令指定的地址必须按 32 位边界对齐，否则设备必须返回 GEV_STATUS_BAD_ALIGNMENT。 |
+| `R-180cd` | R | 设备 | §16.5 READMEM | 132 | 1.0（1.x: `[R14-39cd]`） | 若没有应用持有独占访问，设备必须响应来自主应用或任何次级应用的 READMEM 报文。 |
+| `R-181cd` | R | 设备 | §16.5 READMEM | 132 | 1.0（1.x: `[R14-40cd]`） | 若有应用持有独占访问，设备必须只响应主应用的 READMEM 报文；次级应用的 READMEM 以 GEV_STATUS_ACCESS_DENIED 状态码确认，且 length 置 0（无数据负载）。 |
+| `R-182c` | R | 应用+设备 | §16.5.1 READMEM_CMD | 132 | 1.0（1.x: `[R14-41c]`） | READMEM_CMD 必须遵循图 16-9 的报文布局。 |
+| `R-183c` | R | 应用+设备 | §16.5.2 READMEM_ACK | 133 | 1.0（1.x: `[R14-42c]`） | READMEM_ACK 必须遵循图 16-10 的报文布局。 |
+| `R-184cd` | R | 设备 | §16.5.2 READMEM_ACK | 134 | 1.0（1.x: `[R14-43cd]`） | 只有读出全部请求数据 READMEM 才算成功；否则（包括所请求地址设备不支持的情况）设备必须设置相应状态码，并将报文头 length 字段置 0（无数据负载）。 |
+| `R-185cd` | R | 设备 | §16.6 WRITEMEM | 134 | 2.0 | 所有设备都必须支持 WRITEMEM 命令。 |
+| `O-186ca` | O | 应用 | §16.6 WRITEMEM | 134 | 1.0（1.x: `[O14-44ca]`） | 支持旧版规范的应用应检查 GVCP Capability 寄存器（0x0934）的 bit 30，以确认设备是否支持 WRITEMEM。 |
+| `R-187c` | R | 应用+设备 | §16.6 WRITEMEM | 134 | 1.0（1.x: `[R14-45c]`） | WRITEMEM 命令写入的字节（8 位单元）数必须是 4 的整数倍。 |
+| `R-188cd` | R | 设备 | §16.6 WRITEMEM | 134 | 2.0 | 若 WRITEMEM 命令要写入的字节数不是 4 的整数倍，设备必须返回 GEV_STATUS_BAD_ALIGNMENT。 |
+| `R-189c` | R | 应用+设备 | §16.6 WRITEMEM | 134 | 1.0（1.x: `[R14-46c]`） | WRITEMEM 命令指定的地址必须按 32 位边界对齐，否则设备必须返回 GEV_STATUS_BAD_ALIGNMENT。 |
+| `R-190cd` | R | 设备 | §16.6 WRITEMEM | 134 | 1.0（1.x: `[R14-47cd]`） | 设备必须响应来自主应用的 WRITEMEM 报文。 |
+| `R-191cd` | R | 设备 | §16.6 WRITEMEM | 135 | 1.0（1.x: `[R14-48cd]`） | 任何次级应用试图执行 WRITEMEM 时，设备必须返回 GEV_STATUS_ACCESS_DENIED；例外：设备处于启用 switchover 的控制访问状态，且另一持有正确凭据的应用请求接管控制权。 |
+| `R-192c` | R | 应用+设备 | §16.6.1 WRITEMEM_CMD | 135 | 1.0（1.x: `[R14-49c]`） | WRITEMEM_CMD 必须遵循图 16-11 的报文布局。 |
+| `R-193c` | R | 应用+设备 | §16.6.2 WRITEMEM_ACK | 135 | 1.0（1.x: `[R14-50c]`） | WRITEMEM_ACK 必须遵循图 16-12 的报文布局。 |
+| `R-194cd` | R | 设备 | §16.6.2 WRITEMEM_ACK | 136 | 1.0（1.x: `[R14-51cd]`） | 内存写操作出错时，确认报文中必须给出出错数据的索引（从 0 起算，范围 0 至 Control Channel Max Packet Size - 41）；未出错时该值为成功完成的写操作数。 |
+| `R-195cd` | R | 设备 | §16.6.2 WRITEMEM_ACK | 136 | 1.0（1.x: `[R14-52cd]`） | WRITEMEM 操作出错时，设备必须在确认报文的 status 字段中填入表明失败原因的相应状态码。 |
+| `O-196cd` | O | 设备 | §16.7 PACKETRESEND | 136 | 1.0（1.x: `[O14-53cd]`） | GVSP 发送端应支持 PACKETRESEND 命令。 |
+| `R-197ca` | R | 应用 | §16.7 PACKETRESEND | 136 | 2.0 | 除非设备 GVCP Capability 寄存器（0x0934）的 bit 29（PACKETRESEND）已置位，否则应用不得向设备发送 PACKETRESEND_CMD。 |
+| `CR-198ca` | CR | 应用 | §16.7 PACKETRESEND | 137 | 1.0（1.x: `[CR14-55ca]`） | 若应用支持 PACKETRESEND，发送重传请求时必须清除 GVCP 头中的 ACKNOWLEDGE 位（即不能请求确认），以收到所请求的流数据包作为命令已执行的确认。 |
+| `CR-199cd` | CR | 设备 | §16.7 PACKETRESEND | 137 | 1.0（1.x: `[CR14-56cd]`） | 若支持 PACKETRESEND 命令，GVSP 发送端必须响应来自任何应用（主应用和次级应用）的 PACKETRESEND 报文。 |
+| `CR-200c` | CR | 应用+设备 | §16.7.1 PACKETRESEND_CMD | 137 | 1.0（1.x: `[CR14-59c]`） | 若支持 PACKETRESEND，PACKETRESEND_CMD 必须遵循图 16-13 的报文布局。 |
+| `CR-201cd` | CR | 设备 | §16.7.2 PACKETRESEND Response | 138 | 1.0（1.x: `[CR14-60cd]`） | 若支持 PACKETRESEND_CMD，设备绝不得在控制通道上发出相当于 PACKETRESEND_ACK 的报文（即值为 PACKETRESEND_CMD + 1 的确认）；PACKETRESEND_ACK 并不存在。 |
+| `CR-204st` | CR | 流发送端 | §16.7.2 PACKETRESEND Response | 138 | 2.0 | 若支持 PACKETRESEND，发送端重发所请求的包时必须置位 GVSP 包 flag 字段中的 GEV_FLAG_PACKET_RESEND 标志（bit 15），表明该包源自重传请求。 |
+| `CR-205st` | CR | 流发送端 | §16.7.2 PACKETRESEND Response | 139 | 2.0 | 支持 PACKETRESEND 时，若发送端无法重发所请求的包数据，必须发送一个仅含报文头（不附数据）的流数据包，其 packet_format 字段为“don’t care”，并给出表 16-2 中合适的状态码。 |
+| `CO-206st` | CO | 流发送端 | §16.7.2 PACKETRESEND Response | 140 | 2.0 | 支持 PACKETRESEND 时，若发送端无法重发一段范围的包数据且错误原因相同，设备应：置位 GEV_FLAG_RESEND_RANGE_ERROR 标志；用 packet_id32 标识该状态码适用范围的首包；并扩展报文头，用 last_packet_id32 标识范围末包。 |
+| `CR-207sr` | CR | 流接收端 | §16.7.2 PACKETRESEND Response | 140 | 2.0 | 若 GVSP 接收端支持针对一段 packet_id32 范围的重传命令，则必须支持接收置位了 GEV_FLAG_RESEND_RANGE_ERROR 标志的 GVSP 包。 |
+| `CR-208st` | CR | 流发送端 | §16.7.2 PACKETRESEND Response | 140 | 2.0 | 支持 PACKETRESEND 时，若发送端无法重发且状态码为 GEV_STATUS_PACKET_TEMPORARILY_UNAVAILABLE，则扩展报文头，其最后 32 位必须包含 hold-off 时间，供应用确定再次发起重传请求前需等待的时长。 |
+| `R-209cd` | R | 设备 | §16.8 PENDING | 143 | 1.1（1.x: `[CR14-64cd]`） | 设备不得针对 DISCOVERY_CMD、FORCEIP_CMD 和 PACKETRESEND_CMD 发出 PENDING_ACK。 |
+| `R-210cd` | R | 设备 | §16.8 PENDING | 143 | 1.1（1.x: `[CR14-65cd]`） | 设备必须在命令执行时间超过 Pending Timeout 寄存器所报告的值之前发出 PENDING_ACK。 |
+| `R-211cd` | R | 设备 | §16.8 PENDING | 143 | 1.1（1.x: `[CR14-66cd]`） | 即使有 PENDING_ACK 正在进行，设备也必须响应 DISCOVERY_CMD。 |
+| `R-212cd` | R | 设备 | §16.8 PENDING | 143 | 1.1（1.x: `[CR14-67cd]`） | 发出 PENDING_ACK 会暂停心跳超时计数器，暂停期从发出 PENDING_ACK 起至发送该命令的 ACK 为止。 |
+| `R-213c` | R | 应用+设备 | §16.8.1 PENDING_ACK | 143 | 1.1（1.x: `[CR14-68c]`） | PENDING_ACK 必须遵循图 16-15 的报文布局。 |
+| `R-214cd` | R | 设备 | §16.8.1 PENDING_ACK | 144 | 1.1（1.x: `[CR14-69cd]`） | PENDING_ACK 的 ack_id 字段必须与触发该 PENDING_ACK 的命令的 req_id 字段相同。 |
+| `R-215cd` | R | 设备 | §16.8.1 PENDING_ACK | 144 | 1.1（1.x: `[CR14-70cd]`） | PENDING_ACK 的 time_to_completion 字段必须给出完成命令执行所需的时间（ms）；若届时仍无法完成，设备可再次发出 PENDING_ACK 以进一步延长命令 ACK 超时，重发次数不限。 |
+| `O-216ca` | O | 应用 | §16.9 ACTION | 144 | 1.1（1.x: `[O14-71ca]`） | 应用应检查 GVCP Capability 寄存器（0x0934）的 bit 25（ACTION），以确认设备是否支持 ACTION。 |
+| `O-217ca` | O | 应用 | §16.9 ACTION | 144 | 2.0 | 应用应检查 GVCP Capability 寄存器（0x0934）的 bit 14（scheduled_action_command），以确认设备是否支持定时动作命令（Scheduled Action Commands）。 |
+| `CR-218cd` | CR | 设备 | §16.9 ACTION | 144 | 1.1（1.x: `[CR14-72cd]`） | 若支持 ACTION 报文，设备必须处理来自主应用或任何次级应用的 ACTION_CMD 请求。 |
+| `CR-219c` | CR | 应用+设备 | §16.9.1 ACTION_CMD | 144 | 1.1（1.x: `[CR14-73c]`） | 若支持 ACTION，ACTION_CMD 必须遵循图 16-16 的报文布局。 |
+| `CR-220cd` | CR | 设备 | §16.9.1 ACTION_CMD | 146 | 2.0 | 若支持该命令，带 action time 的 ACTION_CMD 必须排入队列，待设备时间戳等于指定的 action time 时执行。 |
+| `CR-221cd` | CR | 设备 | §16.9.1 ACTION_CMD | 146 | 2.0 | 若设备支持定时动作命令，而收到的有效动作命令的时间标签相对设备时间戳已过去：设备必须立即执行（不排队），若请求了 ACK 则返回 GEV_STATUS_ACTION_LATE；若消息通道已打开且已使能该事件，设备应发出 GEV_EVENT_ACTION_LATE 事件。 |
+| `CR-222cd` | CR | 设备 | §16.9.2 ACTION_ACK | 146 | 1.1（1.x: `[CR14-74cd]`） | 若支持 ACTION_CMD，设备必须仅在请求了确认且该 ACTION_CMD 包满足表 14-2 所列 4 个条件时，才返回 ACTION_ACK。 |
+| `CR-223cd` | CR | 设备 | §16.9.2 ACTION_ACK | 146 | 2.0 | 若支持 ACTION_CMD，对于定时动作命令，设备必须在该命令被排入队列（待未来时刻执行）后立即发送 ACTION_ACK。 |
+| `CR-224c` | CR | 应用+设备 | §16.9.2 ACTION_ACK | 146 | 1.1（1.x: `[CR14-75c]`） | 若支持 ACTION，ACTION_ACK 报文必须遵循图 16-17 的布局。 |
+
+<a id="ch-17"></a>
+### Chapter 17. Message Channel Dictionary  ·  PART 2 - GVCP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `O-225ca` | O | 应用 | §17 Message Channel Dictionary | 147 | 1.2（1.x: `[O15-15ca]`） | 打开消息通道前，应用应检查 GVCP Capability 寄存器（0x0934）的 bit 27（EVENTDATA）和 bit 28（EVENT），确认设备是否支持 EVENT 或 EVENTDATA 命令。 |
+| `CR-226cd` | CR | 设备 | §17 Message Channel Dictionary | 147 | 1.0（1.x: `[CR15-1cd]`） | 若提供消息通道，设备必须提供使能/禁用事件消息生成的方式。 |
+| `CO-227cd` | CO | 设备 | §17 Message Channel Dictionary | 147 | 1.0（1.x: `[CO15-2cd]`） | 用于使能事件生成的寄存器应在 XML 设备描述文件中提供。 |
+| `O-228cd` | O | 设备 | §17.1 EVENT | 147 | 1.0（1.x: `[O15-3cd]`） | 设备应支持 EVENT 报文。 |
+| `CR-229cd` | CR | 设备 | §17.1 EVENT | 147 | 1.0（1.x: `[CR15-5cd]`） | 若支持 EVENT，每条 EVENT 命令必须带有表示事件在设备上产生时刻的 64 位时间戳，其频率由 Timestamp Tick Frequency 寄存器（0x093C、0x0940）给出；该寄存器为 0 表示无时间戳，此时报文 timestamp 字段必须置 0。 |
+| `CO-230cd` | CO | 设备 | §17.1 EVENT | 147 | 1.0（1.x: `[CO15-6cd]`） | 支持 EVENT 时，设备特定事件所用的事件标识符应在 XML 设备描述文件中加以描述。 |
+| `CR-231c` | CR | 应用+设备 | §17.1.1 EVENT_CMD | 148 | 1.0（1.x: `[CR15-7c]`） | 若支持 EVENT，EVENT_CMD 必须遵循图 17-1 的报文布局。 |
+| `CR-232c` | CR | 应用+设备 | §17.1.2 EVENT_ACK | 149 | 1.0（1.x: `[CR15-8c]`） | 若支持 EVENT，EVENT_ACK 必须遵循图 17-2 的报文布局。 |
+| `CR-233cd` | CR | 设备 | §17.2 EVENTDATA | 149 | 1.0（1.x: `[CR15-10cd]`） | 若支持 EVENTDATA，每条 EVENTDATA 命令必须带有表示事件在设备上产生时刻的 64 位时间戳，其频率由 Timestamp Tick Frequency 寄存器（0x093C、0x0940）给出；该寄存器为 0 表示无时间戳，此时 timestamp 字段置 0。 |
+| `CR-234cd` | CR | 设备 | §17.2 EVENTDATA | 150 | 1.0（1.x: `[CR15-11cd]`） | 支持 EVENTDATA 时，除非应用置位了 MCCFG 寄存器的 MCEC_enable 位，否则不能在一条 EVENTDATA 中串联多个事件；MCEC_enable 未置位时，设备必须在每条 EVENTDATA 报文中只放一个事件。 |
+| `CO-235cd` | CO | 设备 | §17.2 EVENTDATA | 150 | 1.0（1.x: `[CO15-12cd]`） | 支持 EVENTDATA 时，其关联的设备特定数据的内容应在 XML 设备描述文件中加以说明。 |
+| `CR-236c` | CR | 应用+设备 | §17.2.1 EVENTDATA_CMD | 150 | 1.0（1.x: `[CR15-13c]`） | 若支持 EVENTDATA，EVENTDATA_CMD 必须遵循图 17-3 的报文布局。 |
+| `CR-237c` | CR | 应用+设备 | §17.2.2 EVENTDATA_ACK | 152 | 1.0（1.x: `[CR15-14c]`） | 若支持 EVENTDATA，EVENTDATA_ACK 必须遵循图 17-4 的报文布局。 |
+
+<a id="ch-18"></a>
+### Chapter 18. Command and Acknowledge Values  ·  PART 2 - GVCP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `R-238c` | R | 应用+设备 | §18 Command and Acknowledge Values | 154 | 1.0（1.x: `[R16-1c]`） | 设备与应用必须使用本节表中规定的值表示各类报文；确认报文的值总是对应命令值 + 1（若存在对应命令），PACKETRESEND_CMD 和 PENDING_ACK 例外。 |
+
+<a id="ch-19"></a>
+### Chapter 19. Status Codes  ·  PART 2 - GVCP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `O-239cd` | O | 设备 | §19 Status Codes | 156 | 1.0（1.x: `[O18-1cd]`） | 设备应返回能尽可能详细说明错误来源的状态码。 |
+| `R-240cd` | R | 设备 | §19 Status Codes | 156 | 1.0（1.x: `[R18-2cd]`） | 若设备无法返回更具体的状态码，至少必须返回 GEV_STATUS_ERROR。 |
+| `O-241st` | O | 流发送端 | §19 Status Codes | 156 | 1.2（1.x: `[O18-3st]`） | GVSP 发送端应返回能尽可能详细反映流传输活动状态的状态码。 |
+| `R-242st` | R | 流发送端 | §19 Status Codes | 156 | 1.2（1.x: `[R18-4st]`） | 发生流传输错误时，若 GVSP 发送端无法返回更具体的状态码，至少必须返回 GEV_STATUS_ERROR。 |
+
+<a id="ch-20"></a>
+### Chapter 20. Events  ·  PART 2 - GVCP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `CR-243cd` | CR | 设备 | §20 Events | 160 | 1.0（1.x: `[CR19-1cd]`） | 支持消息通道时，携带数据的事件标识符必须用 EVENTDATA 命令发送（若支持该命令）。 |
+
+<a id="ch-21"></a>
+### Chapter 21. ICMP  ·  PART 2 - GVCP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `R-244cd` | R | 设备 | §21 ICMP | 161 | 1.0（1.x: `[R20-1cd]`） | 设备必须在其所有支持的网络接口上至少支持表 21-1 所列的 ICMP 子集。 |
+
+<a id="ch-23"></a>
+### Chapter 23. GVSP Transport Protocol Considerations  ·  PART 3 - GVSP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `R-245s` | R | 流收发两端 | §23 GVSP Transport Protocol Considerations | 165 | 1.0（1.x: `[R22-1s]`） | GVSP 流协议必须使用基于 IPv4 的 UDP 传输。 |
+| `R-246s` | R | 流收发两端 | §23 GVSP Transport Protocol Considerations | 165 | 1.0（1.x: `[R22-2s]`） | GVSP 发送端和接收端不得在 GVSP 的 IP 数据报中使用任何 IP 选项，使 IP 头固定为 20 字节，便于用硬件高效实现 UDP/IP 卸载引擎。 |
+| `R-247sr` | R | 流接收端 | §23.1 UDP | 165 | 1.0（1.x: `[R22-3sr]`） | 由于 UDP 不保证投递顺序，GVSP 接收端必须能够处理乱序到达的数据包。 |
+| `R-248st` | R | 流发送端 | §23.1.6 Device error handling during acquisition and transmission | 168 | 1.0（1.x: `[R22-4st]`） | GVSP 发送端发生采集错误时可能无法发出该数据块的全部数据包，但只要已为该块发出至少一个包，就必须发送带相应状态码的尾包（data trailer）。 |
+| `R-249st` | R | 流发送端 | §23.1.6 Device error handling during acquisition and transmission | 169 | 2.0 | 若 GVSP 发送端因内部内存不足而丢弃数据负载包，必须将对应尾包（data trailer）的 status 字段设为 GEV_STATUS_DATA_OVERRUN。 |
+| `R-250st` | R | 流发送端 | §23.1.6 Device error handling during acquisition and transmission | 169 | 2.0 | GVSP 发送端丢弃一个已采集的完整数据块时，必须仍将其计入 block_id64 计数，并在链路上发送的下一个有效前导包（data leader）中置位 GEV_FLAG_PREVIOUS_BLOCK_DROPPED 标志。 |
+
+<a id="ch-24"></a>
+### Chapter 24. GVSP Data Block  ·  PART 3 - GVSP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `R-251st` | R | 流发送端 | §24 GVSP Data Block | 170 | 1.0（1.x: `[R23-2st]`） | GVSP 发送端必须按顺序发送数据块：当前块的尾包发出前不得发送下一块的前导包；唯一例外是 PACKETRESEND，它可请求当前或之前数据块中的任意包。 |
+| `CR-252st` | CR | 流发送端 | §24 GVSP Data Block | 170 | 1.0（1.x: `[CR24-10st]`） | 若图像源支持以 GVSP 负载传输多个 ROI，则多个 ROI 间的重叠数据必须随每个 ROI 重复传输，使每幅图像都能在各自的数据块中完整提供。 |
+| `CR-253st` | CR | 流发送端 | §24 GVSP Data Block | 170 | 1.0（1.x: `[CR24-11st]`） | 若设备支持多个 ROI 且分别用不同的 GVSP 数据块传输，则同一次曝光的不同 ROI 必须使用相同的时间戳。 |
+| `CR-254st` | CR | 流发送端 | §24 GVSP Data Block | 171 | 2.0 | 若 GVSP 发送端提供隔行（interlaced）图像数据传输模式，则必须同时支持去隔行（de-interlaced）传输模式。 |
+| `R-256s` | R | 流收发两端 | §24.1 GVSP Data Block Transmission | 173 | 1.0（1.x: `[R23-1s]`） | 一个数据块的 GVSP 传输必须包含三部分：1 个 Data Leader 包（标志新块开始）、1 个或多个 Data Payload 包（承载该块实际数据）、1 个 Data Trailer 包（标志块结束）。 |
+| `R-257s` | R | 流收发两端 | §24.2 Data Block Packet Header | 173 | 1.0（1.x: `[R24-2s]`） | 所有 GVSP 报文头、前导包（data leader）和尾包（data trailer）都必须使用网络字节序（大端序）。 |
+| `R-258s` | R | 流收发两端 | §24.2 Data Block Packet Header | 173 | 1.0（1.x: `[R24-1s]`） | 所有 GVSP 包都必须带有图 24-2 所示的数据包头。 |
+| `R-259st` | R | 流发送端 | §24.2 Data Block Packet Header | 174 | 2.0 | 流通道打开时，GVSP 发送端必须将该流通道的 block_id64 复位为 1。 |
+| `R-260st` | R | 流发送端 | §24.3.1 GVSP Data Leader Packet | 175 | 1.0（1.x: `[R24-3st]`） | GVSP 前导包（data leader）必须是数据块的第一个包。 |
+| `R-261st` | R | 流发送端 | §24.3.1 GVSP Data Leader Packet | 175 | 1.0（1.x: `[R24-4st]`） | GVSP 前导包必须单独成包且 packet_id32 为 0；其大小（含 IP、UDP、GVSP 头）最多 576 字节，除非置位了 SCCFGx 寄存器的 large_leader_trailer_enable 位，此时最大长度由 SCPSx 寄存器给出。 |
+| `R-262s` | R | 流收发两端 | §24.3.1 GVSP Data Leader Packet | 175 | 2.0 | GVSP 数据前导包（data leader packet）必须遵循图 24-3 规定的布局。 |
+| `R-263st` | R | 流发送端 | §24.3.2 GVSP Data Payload Packet | 177 | 1.0（1.x: `[R24-12st]`） | 采用通用 GVSP 传输（payload packet format 3）时，除最后一个外的所有数据载荷包都必须使用 SCPSx 寄存器中请求的 packet_size。 |
+| `R-573st` | R | 流发送端 | §24.3.2 GVSP Data Payload Packet | 177 | 2.2 | GVSP 载荷包的大小不得超过 SCPSx 寄存器中的 packet_size。 |
+| `R-568sr` | R | 流接收端 | §24.3.2 GVSP Data Payload Packet | 177 | 2.1 | 接收端必须丢弃所收到的、超出 PayloadSize 的 GVSP 载荷数据。 |
+| `R-264st` | R | 流发送端 | §24.3.2 GVSP Data Payload Packet | 177 | 2.0 | GVSP 数据载荷包必须按连续的 packet ID 发送，相邻两包之间 packet ID 必须依次加 1。 |
+| `R-265s` | R | 流收发两端 | §24.3.2 GVSP Data Payload Packet | 177 | 2.0 | GVSP 数据载荷包（data payload packet）的包头必须遵循图 24-4 规定的布局。 |
+| `R-266st` | R | 流发送端 | §24.3.3 GVSP Data Trailer Packet | 178 | 1.0（1.x: `[R24-18st]`） | GVSP 数据尾包（data trailer packet）必须是该 block 的最后一个包。 |
+| `R-267st` | R | 流发送端 | §24.3.3 GVSP Data Trailer Packet | 178 | 1.0（1.x: `[R24-19st]`） | GVSP 数据尾包必须作为独立的包发送，且整包不超过 576 字节（含 IP、UDP 和 GVSP 头）；若 SCCFGx 寄存器的 large_leader_trailer_enable 位已置位，则其最大尺寸由 SCPSx 寄存器给出。 |
+| `R-268st` | R | 流发送端 | §24.3.3 GVSP Data Trailer Packet | 178 | 1.0（1.x: `[R24-20st]`） | 发送完 GVSP 数据尾包后，必须将 block_id64 递增到下一个有效值，并为下一个 block 将 packet_id32 复位为 0。 |
+| `R-269s` | R | 流收发两端 | §24.3.3 GVSP Data Trailer Packet | 178 | 1.0（1.x: `[R24-21s]`） | GVSP 数据尾包（data trailer packet）必须遵循图 24-5 规定的布局。 |
+| `CR-276s` | CR | 流收发两端 | §24.4 GVSP Chunk Data | 179 | 1.1（1.x: `[CR23-12s]`） | 若支持包含 Chunk Data 的 GVSP 载荷，则所有 chunk tag 都必须使用网络字节序（大端）。 |
+| `CR-277s` | CR | 流收发两端 | §24.4 GVSP Chunk Data | 180 | 1.1（1.x: `[CR23-13s]`） | 若支持包含 Chunk Data 的 GVSP 载荷，则数据载荷包中多字节的 chunk 图像数据默认必须采用小端序（little-endian）。 |
+| `CR-278st` | CR | 流发送端 | §24.4 GVSP Chunk Data | 180 | 1.0（1.x: `[CR23-9st]`） | 若使用包含 Chunk Data 的 GVSP 载荷，流必须按图 24-7 所述的 chunk 数据格式输出数据。 |
+| `CO-279st` | CO | 流发送端 | §24.4 GVSP Chunk Data | 181 | 1.0（1.x: `[CO23-10st]`） | 若支持 Chunk Data，应在 XML 设备描述文件中定义各个 chunk。 |
+| `CR-280st` | CR | 流发送端 | §24.5 GVSP Test Packet | 183 | 1.1（1.x: `[CR24-29st]`） | 若 GVSP 发送端在 GVCP Capability 寄存器中支持 test_data 能力，必须用 24.5.1 节的 LFSR 生成器输出填充测试包的 payload_data（首字节为 LFSR 初值 LSB，即 0xFF），否则载荷内容可任意；该要求适用于发送端关联的所有网络接口。 |
+| `CO-281sr` | CO | 流接收端 | §24.5 GVSP Test Packet | 183 | 1.1（1.x: `[CO24-30sr]`） | 若 GVSP 发送端支持 test_data 能力（GVCP Capability 寄存器）并发出了测试包，则请求该测试包的 GVSP 接收端及其应用应将载荷内容与 24.5.1 节 LFSR 生成器产生的数据进行比对。 |
+| `R-282s` | R | 流收发两端 | §24.5 GVSP Test Packet | 183 | 1.0（1.x: `[R24-28st]`） | GVSP 测试包（test packet）必须遵循图 24-8 规定的布局。 |
+
+<a id="ch-25"></a>
+### Chapter 25. GVSP Payload Types  ·  PART 3 - GVSP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `CR-538st` | CR | 流发送端 | §25.1 GVSP Extended Chunk Mode | 188 | 2.1 | 使用 Extended Chunk 时，若采用 GVSP Multi-part 载荷，必须额外增加一个（最后的）part，用于承载定义载荷各数据 part 的首批 chunk tag 以及所有附加 chunk。 |
+| `CR-284st` | CR | 流发送端 | §25.2 GVSP Image Payload Type | 189 | 1.0（1.x: `[CR23-3st]`） | 若支持 GVSP Image 载荷，使用该载荷类型的流必须以光栅扫描（raster-scan）格式在每个数据载荷包中放置数据。 |
+| `CR-285st` | CR | 流发送端 | §25.2 GVSP Image Payload Type | 190 | 1.0（1.x: `[CR23-4st]`） | 若支持 GVSP Image 载荷，GVSP 发送端必须按顺序发送数据载荷包（按图 24-1 从 1 到 N-1）。 |
+| `CR-286st` | CR | 流发送端 | §25.2 GVSP Image Payload Type | 190 | 1.0（1.x: `[CR23-5s]`） | 若在单个流通道上用 GVSP Image 载荷传输多抽头（multi-tap）数据，GVSP 发送端必须先在本地重建图像，使其能按连续的 packet ID 发送。 |
+| `CR-287st` | CR | 流发送端 | §25.2 GVSP Image Payload Type | 190 | 1.0（1.x: `[CR23-6st]`） | 若用 GVSP Image 载荷传输多抽头数据且发送端无法在发送前重建图像，则应为每个抽头使用单独的流通道传输；注：也可用 Multi-part 载荷在单个流通道上传输多抽头数据而无需在相机内重建。 |
+| `CR-288s` | CR | 流收发两端 | §25.2.1 Image Data Leader Packet | 190 | 1.0（1.x: `[CR24-5s]`） | 若支持 GVSP Image 载荷，其数据前导包（Data Leader）必须遵循图 25-2 规定的布局。 |
+| `CR-289s` | CR | 流收发两端 | §25.2.2 Image Data Payload Packet | 193 | 1.0（1.x: `[CR24-13s]`） | 若支持 GVSP Image 载荷，其数据载荷包（Data Payload）必须遵循图 25-3 规定的布局。 |
+| `CR-290s` | CR | 流收发两端 | §25.2.3 Image Data Trailer Packet | 194 | 1.0（1.x: `[CR24-22s]`） | 若支持 GVSP Image 载荷，其数据尾包（Data Trailer）必须遵循图 25-4 规定的布局。 |
+| `CR-305s` | CR | 流收发两端 | §25.3.1 Chunk Data Leader Packet | 195 | 1.0（1.x: `[CR24-8s]`） | 若支持 GVSP Chunk Data 载荷，其数据前导包（Data Leader）必须遵循图 25-5 规定的布局。 |
+| `CR-306s` | CR | 流收发两端 | §25.3.2 Chunk Data Payload Packet | 195 | 1.0（1.x: `[CR24-16s]`） | 若支持 GVSP Chunk Data 载荷，其数据载荷包（Data Payload）必须遵循图 25-6 规定的布局。 |
+| `CR-307s` | CR | 流收发两端 | §25.3.3 Chunk Data Trailer Packet | 196 | 1.0（1.x: `[CR24-25s]`） | 若支持 GVSP Chunk Data 载荷，其数据尾包（Data Trailer）必须遵循图 25-7 规定的布局。 |
+| `R-574st` | R | 流发送端 | §25.4 GVSP GenDC Payload Type | 197 | 2.2 | 要使用 GVSP GenDC 载荷类型，载荷必须符合 GenICam GenDC 规范。 |
+| `R-575st` | R | 流发送端 | §25.4.1 GVSP GenDC Principles | 197 | 2.2 | GenDC component 的任一字节都不得被包含在多于一个 GVSP 载荷包中。 |
+| `R-576st` | R | 流发送端 | §25.4.1 GVSP GenDC Principles | 197 | 2.2 | 当 GVSP block 含 preliminary descriptor（payload_specific_flag 的 bit 0 置位）时，所有含 preliminary descriptor 数据的包必须先于任何含最终 descriptor 或 component 数据的包发送。 |
+| `R-577st` | R | 流发送端 | §25.4.1 GVSP GenDC Principles | 197 | 2.2 | 在 GVSP GenDC 传输中，preliminary descriptor 必须与最终（final）descriptor 的格式相同。 |
+| `R-578s` | R | 流收发两端 | §25.4.1 GVSP GenDC Principles | 197 | 2.2 | preliminary descriptor 中标记为 variable 的字段在最终 descriptor 中可取不同值；其余所有字段在两者中必须完全一致。 |
+| `CR-579s` | CR | 流收发两端 | §25.4.2 GVSP GenDC Leader Packet | 198 | 2.2 | 若使用 GVSP GenDC 载荷，其数据前导包（Data Leader）必须遵循图 25-8 规定的布局。 |
+| `R-580st` | R | 流发送端 | §25.4.3 GVSP GenDC Data Payload Packet | 199 | 2.2 | GVSP 发送端必须通过 flow_id 和 flow_flag 字段报告所有与 flow 相关的信息。 |
+| `R-581st` | R | 流发送端 | §25.4.3 GVSP GenDC Data Payload Packet | 199 | 2.2 | GVSP 发送端发送 GenDC descriptor（无论是否为 preliminary）时，必须将 flow_id 设为 0。 |
+| `R-582sr` | R | 流接收端 | §25.4.3 GVSP GenDC Data Payload Packet | 199 | 2.2 | GVSP 接收端必须依据 data_destination_offset 确定载荷数据在 GVSP block 中的位置。 |
+| `CR-583s` | CR | 流收发两端 | §25.4.3 GVSP GenDC Data Payload Packet | 199 | 2.2 | 若使用 GVSP GenDC 数据载荷，其数据载荷包（Data Payload）必须遵循图 25-9 规定的布局。 |
+| `CR-584s` | CR | 流收发两端 | §25.4.4 GVSP GenDC Data Trailer Packet | 201 | 2.2 | 若使用 GVSP GenDC 载荷，其数据尾包（Data Trailer）必须遵循图 25-10 规定的布局。 |
+
+<a id="ch-26"></a>
+### Chapter 26. Pixel Layouts  ·  PART 3 - GVSP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `O-343st` | O | 流发送端 | §26 Pixel Layouts | 202 | 1.0（1.x: `[O25-1st]`） | 提供大于 8 位像素深度的 GVSP 发送端还应提供 8 位传输模式（通过截去最低有效位实现），以便 GVSP 接收端显示图像。 |
+| `R-344st` | R | 流发送端 | §26.1 Pixel Alignment | 202 | 1.0（1.x: `[R25-2st]`） | 数据载荷包中占多个字节的像素数据必须采用小端序（little-endian）。 |
+| `O-345s` | O | 流收发两端 | §26.3 Pixel Formats | 203 | 1.0（1.x: `[O25-3s]`） | GVSP 发送端或接收端应支持 GenICam Pixel Format Values 文档所列像素格式中的一个子集。 |
+| `CR-357st` | CR | 流发送端 | §26.3.1 A Note about Bayer Pixel Formats | 203 | 1.0（1.x: `[CR25-11st]`） | 所有 Bayer 像素格式（PixelFormat 特性）都必须表示全幅图像（无 ROI 时）的 Bayer 排列。 |
+
+<a id="ch-29"></a>
+### Chapter 29. GVRSP Streaming  ·  PART 4 - GVRSP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `CR-617s` | CR | 流收发两端 | §29.2 Block Layout and Transmission | 212 | 3.0 | 使用 GVRSP 流模式时，载荷数据必须按 GenICam GenDC 版本 1 定义的格式组织（允许任意次版本）。 |
+| `CR-618st` | CR | 流发送端 | §29.2 Block Layout and Transmission | 213 | 3.0 | GVRSP 模式下，发送端每发送一个 block 都必须使用 buffer layout table 中配置的所有 buffer；若实际载荷数据少于接收端预期，必须以不完整和/或空传输补齐剩余 buffer。 |
+| `CR-619st` | CR | 流发送端 | §29.2 Block Layout and Transmission | 214 | 3.0 | GVRSP 模式下，发送端向任一 buffer 传输的数据量都不得超过 buffer layout table 中为该 buffer 配置的大小。 |
+| `CR-620st` | CR | 流发送端 | §29.3 Buffer Layout Table | 214 | 3.0 | GVRSP 模式下，当 RSCCTLx 寄存器的 stream_enable 位为 1 时，发送端必须冻结 buffer layout table 的内容。 |
+| `R-621s` | R | 流收发两端 | §29.3 Buffer Layout Table | 215 | 3.0 | buffer layout table 的 buffer_count 字段必须大于或等于 1。 |
+| `R-622s` | R | 流收发两端 | §29.3 Buffer Layout Table | 215 | 3.0 | buffer layout table 中属于 flow X 的所有 buffer[n].size 之和，必须等于对应 GenDC flow mapping table 中 flow X 的 FlowSize。 |
+| `R-623s` | R | 流收发两端 | §29.3 Buffer Layout Table | 215 | 3.0 | buffer layout table 中所有 buffer[n].size 之和必须等于 SFNC 特性 PayloadSize。 |
+| `R-624s` | R | 流收发两端 | §29.3 Buffer Layout Table | 215 | 3.0 | buffer layout table 的第一个 buffer 必须经由 GenDC flow 0 传输（buffer[0].flow_id = 0）。 |
+| `R-625s` | R | 流收发两端 | §29.3 Buffer Layout Table | 215 | 3.0 | duplicate 位必须仅在 buffer layout table 的第一个 buffer 上置位（buffer[0].duplicate = 1）。 |
+| `R-626st` | R | 流发送端 | §29.3 Buffer Layout Table | 215 | 3.0 | 当 Buffer Layout Table 中第一个 buffer 的 duplicate 位置位时，该 buffer 必须在指定 flow 上作为该 block 的最后一个 buffer 再发送一次。 |
+| `R-627s` | R | 流收发两端 | §29.3 Buffer Layout Table | 215 | 3.0 | buffer layout table 的所有字段都必须使用网络字节序（大端）。 |
+| `CR-628s` | CR | 流收发两端 | §29.4 Detecting Incomplete Block Transmissions | 219 | 3.0 | GVRSP 模式下，若 container 的大小可能逐个变化，发送端必须使用第一个 buffer 的副本（duplicate of the first buffer）。 |
+| `CR-629st` | CR | 流发送端 | §29.4 Detecting Incomplete Block Transmissions | 219 | 3.0 | GVRSP 模式下启用首 buffer 副本时，若在发出 block 的第一个 buffer 后中止传输，发送端必须发送一个空的副本 buffer 以标示该 block 不完整。 |
+| `CR-630st` | CR | 流发送端 | §29.4 Detecting Incomplete Block Transmissions | 219 | 3.0 | GVRSP 模式下启用首 buffer 副本时，发送端必须仅在以下任一条件满足后才发送副本 buffer：能保证整个 block 送达；或需中止该 block 的传输（此时副本 buffer 为空）。 |
+
+<a id="ch-30"></a>
+### Chapter 30. GVRSP Stream Channel  ·  PART 4 - GVRSP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `CR-631st` | CR | 流发送端 | §30.1 Opening a GVRSP Stream Channel | 222 | 3.0 | GVRSP 模式下，当流通道未使能（RSCCTLx 寄存器的 stream_enable 位未置位）时，发送端不得在该流通道上发送流数据。 |
+| `CR-632st` | CR | 流发送端 | §30.1 Opening a GVRSP Stream Channel | 222 | 3.0 | GVRSP 模式下，若该流通道有任一 GenDC flow 尚无关联的已连接 QP，发送端必须以 GEV_STATUS_BUSY 回应 Stream Enable 请求（置位 RSCCTLx 的 stream_enable 位），并保持 Configuration 状态。 |
+| `CR-633st` | CR | 流发送端 | §30.2 Closing a GVRSP Stream Channel | 222 | 3.0 | GVRSP 模式下，当向 GVRSP Stream Channel Control 寄存器的 stream_enable 位写入 0 时，发送端必须断开该流所有已打开的 QP。 |
+
+<a id="ch-31"></a>
+### Chapter 31. GVRSP Connection Maintenance  ·  PART 4 - GVRSP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `CR-634sr` | CR | 流接收端 | §31.1 ServiceID for GigE Vision | 223 | 3.0 | 接收端通过发送连接请求消息（CM REQ）发起 RoCEv2 连接时，必须使用 Reliable Connection 传输服务类型，并采用 GigE Vision 服务对应的 ServiceID（TCP 端口 3956）。 |
+| `CR-635st` | CR | 流发送端 | §31.1 ServiceID for GigE Vision | 223 | 3.0 | GVRSP 模式下，若 CM REQ 中的 ServiceID 对 GigE Vision 服务无效，发送端必须拒绝该连接请求（见 31.4 节）。 |
+| `CR-636st` | CR | 流发送端 | §31.2 Connecting Queue Pairs | 224 | 3.0 | GVRSP 模式下，发送端作为 CM 响应方必须始终答复连接请求（CM REQ）：回复 CM REP 或连接拒绝消息（CM REJ）。 |
+| `CR-637st` | CR | 流发送端 | §31.2 Connecting Queue Pairs | 224 | 3.0 | GVRSP 模式下，当控制通道处于关闭状态时，发送端必须拒绝连接请求（CM REQ）（见 31.4 节）。 |
+| `CR-638st` | CR | 流发送端 | §31.3 Mapping QP to GVRSP Stream and GenDC Flow ID | 228 | 3.0 | GVRSP 模式下，当 GVRSP Stream Channel Control 寄存器的 stream_enable 位为 1 时，发送端必须拒绝针对该流的所有连接请求（CM REQ）。 |
+| `CR-639sr` | CR | 流接收端 | §31.3 Mapping QP to GVRSP Stream and GenDC Flow ID | 228 | 3.0 | GVRSP 模式下，接收端必须为每个 GenDC flow 连接一个独立的 QP，并为每个 flow 发送一条 CM REQ，在其 Consumer Private Data 字段中按图 31-2 填入对应的 flow_id、stream_channel_index 和正确的 qp_connection_key。 |
+| `CR-640st` | CR | 流发送端 | §31.3 Mapping QP to GVRSP Stream and GenDC Flow ID | 228 | 3.0 | GVRSP 模式下，若 CM REQ 中 stream_channel_index 与 flow_id 的组合无效，发送端必须拒绝该连接请求（见 31.4 节）。 |
+| `CR-641st` | CR | 流发送端 | §31.3 Mapping QP to GVRSP Stream and GenDC Flow ID | 228 | 3.0 | GVRSP 模式下，若 CM REQ 中的 signature 无效，发送端必须拒绝该连接请求（见 31.4 节）。 |
+| `CR-642st` | CR | 流发送端 | §31.3 Mapping QP to GVRSP Stream and GenDC Flow ID | 228 | 3.0 | GVRSP 模式下，若 CM REQ 中的 version 不受支持，发送端必须拒绝该连接请求（见 31.4 节）。 |
+| `CR-643st` | CR | 流发送端 | §31.3 Mapping QP to GVRSP Stream and GenDC Flow ID | 228 | 3.0 | GVRSP 模式下，若某 GenDC flow 已分配了打开的 QP，发送端必须拒绝针对该 flow 的连接请求（CM REQ）（见 31.4 节）。 |
+| `CR-644st` | CR | 流发送端 | §31.3 Mapping QP to GVRSP Stream and GenDC Flow ID | 228 | 3.0 | GVRSP 模式下，支持多网络接口的发送端若无法将 stream_channel_index 或 flow_id 映射到 REQ 消息所到达的物理网络接口，必须拒绝该 CM REQ（见 31.4 节）。 |
+| `CR-645s` | CR | 流收发两端 | §31.4 Rejecting a REQ or REP Message | 229 | 3.0 | 流发送端或接收端因 GigE Vision 特定原因产生的所有 REJ 消息，必须在 Reason 字段使用 Consumer Reject 代码，并按图 31-3 在 PrivateData 字段提供附加错误信息。 |
+
+<a id="ch-32"></a>
+### Chapter 32. Upstream Communication  ·  PART 4 - GVRSP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `CR-646s` | CR | 流收发两端 | §32 Upstream Communication | 234 | 3.0 | GVRSP 上行（upstream）消息的所有字段都必须使用网络字节序（大端）。 |
+| `CR-647sr` | CR | 流接收端 | §32 Upstream Communication | 234 | 3.0 | GVRSP 模式下，流接收端必须支持 MSG_CREDITS 消息。 |
+| `CR-648st` | CR | 流发送端 | §32 Upstream Communication | 234 | 3.0 | GVRSP 模式下，流发送端必须支持 MSG_CREDITS 消息。 |
+| `CR-649st` | CR | 流发送端 | §32 Upstream Communication | 235 | 3.0 | GVRSP 模式下，流发送端必须通过设备 bootstrap 寄存器 RSCUCAPx 中相应的能力位，声明其对所有可选上行消息类型（设备专有消息除外）的支持情况。 |
+| `CR-650sr` | CR | 流接收端 | §32 Upstream Communication | 235 | 3.0 | GVRSP 模式下，流接收端必须仅通过对应流通道中 GenDC flow 0 的已连接 QP 发送上行消息。 |
+| `CR-651st` | CR | 流发送端 | §32 Upstream Communication | 235 | 3.0 | GVRSP 模式下，流发送端必须仅接受经 GenDC flow 0 已连接 QP 送达的上行消息，对该流通道其他 GenDC flow 上收到的上行消息不予处理，且收到此类消息时不得产生任何 InfiniBand/RoCEv2 传输层错误。 |
+| `CR-652sr` | CR | 流接收端 | §32 Upstream Communication | 236 | 3.0 | GVRSP 模式下，流接收端不得发送大于 RSCUMAXx 寄存器（GVRSP Stream Channel Upstream Maximum Supported Message Size）所规定大小的上行消息。 |
+| `CR-653st` | CR | 流发送端 | §32 Upstream Communication | 236 | 3.0 | GVRSP 模式下，流发送端必须随时准备接收、接受并肯定确认任何不超过 RSCUMAXx 寄存器规定大小的上行消息；即使消息无效（如类型不支持、经非 0 号 GenDC flow 送达、所请求的操作无法执行），也不得产生任何 InfiniBand/RoCEv2 传输层错误。 |
+| `CR-654sr` | CR | 流接收端 | §32.3 Device-Specific Messages | 237 | 3.0 | GVRSP 模式下，流接收端发送设备专有（device-specific）上行消息时，必须将 opcode 字段的最高有效位置 1。 |
+
+<a id="ch-33"></a>
+### Chapter 33. Application-Level Flow Control  ·  PART 4 - GVRSP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `CR-655st` | CR | 流发送端 | §33.1 Flow Control Mechanism | 238 | 3.0 | GVRSP 模式下，流发送端处于 Configuration 状态（即对应流通道 RSCCTLx 的 stream_enable 位为 0）时，必须将 container credit 计数器置为 0。 |
+| `CR-656st` | CR | 流发送端 | §33.1 Flow Control Mechanism | 238 | 3.0 | GVRSP 模式下，流发送端每收到一条有效的 MSG_CREDITS 上行消息，都必须将 container credit 计数器增加该消息所指定的 credit 数。 |
+| `CR-657st` | CR | 流发送端 | §33.1 Flow Control Mechanism | 238 | 3.0 | GVRSP 模式下，流发送端必须在某个 block（GenDC container）被提交发送时递减 container credit 计数器，且最晚不得迟于该 block 最后一个字节的发送。 |
+| `CR-658st` | CR | 流发送端 | §33.1 Flow Control Mechanism | 238 | 3.0 | GVRSP 模式下，若 container credit 计数器不大于 0，流发送端不得开始发送新的 block（GenDC container）。 |
+| `CR-659sr` | CR | 流接收端 | §33.1 Flow Control Mechanism | 239 | 3.0 | GVRSP 模式下，流接收端发送的 MSG_CREDITS 上行消息所指定的 credit 数不得导致发送端 credit 计数器溢出；计数器最大值由 RSCCMAXx 寄存器定义。 |
+| `CR-660st` | CR | 流发送端 | §33.1 Flow Control Mechanism | 239 | 3.0 | GVRSP 模式下，若流发送端收到的 MSG_CREDITS 上行消息所指定的 credit 数会使其 credit 计数器溢出，必须按 31.5 节释放所有已连接的 Queue Pair，以保持收发两端计数同步；流接收端随后需重新建立连接。 |
+| `CR-661sr` | CR | 流接收端 | §33.1 Flow Control Mechanism | 239 | 3.0 | GVRSP 模式下，流接收端必须先为某 GenDC container 对应的所有 buffer 投递 QP 接收请求，再为该 container 发放 container credit；一次发放多个 credit 时，必须确保对应各 container 的所有 buffer 均已投递接收请求。 |
+
+<a id="ch-34"></a>
+### Chapter 34. Shared Receive Queues  ·  PART 4 - GVRSP
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `CR-662sr` | CR | 流接收端 | §34 Shared Receive Queues | 241 | 3.0 | GVRSP 模式下，接收端不得为流通道 QP 使用 Shared Receive Queue，以免 buffer 被乱序接收。 |
+
+<a id="ch-36"></a>
+### Chapter 36. Bootstrap Registers  ·  PART 5 - Bootstrap Registers
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `R-413cd` | R | 设备 | §36 Bootstrap Registers | 246 | 1.0（1.x: `[R27-1cd]`） | 所有符合 GigE Vision 的设备都必须具备全部必需（mandatory）的 bootstrap 寄存器（标明为可选者除外），寄存器清单见表 36-1。 |
+| `O-414cd` | O | 设备 | §36 Bootstrap Registers | 246 | 1.1（1.x: `[O27-37cd]`） | bootstrap 寄存器应在 XML 设备描述文件中提供，并遵守 GenICam Standard Features Naming Convention for GigE Vision 中定义的规则。 |
+| `R-415cd` | R | 设备 | §36 Bootstrap Registers | 246 | 1.0（1.x: `[R27-2cd]`） | 设备的所有寄存器（含 bootstrap 寄存器和厂商自定义寄存器）都必须 32 位对齐。 |
+| `R-416cd` | R | 设备 | §36 Bootstrap Registers | 246 | 2.0 | 设备的所有 bootstrap 寄存器都必须以大端序（big-endian）呈现。 |
+| `R-417ca` | R | 应用 | §36 Bootstrap Registers | 246 | 1.0（1.x: `[R27-4ca]`） | 当信息跨越多个 32 位寄存器时，应用必须先访问地址最低的寄存器，再按地址递增依次访问其余寄存器，直至地址最高的寄存器。 |
+| `R-418cd` | R | 设备 | §36 Bootstrap Registers | 247 | 1.0（1.x: `[R27-5cd]`） | bootstrap 寄存器空间中的所有字符串必须符合 Device Mode 寄存器（地址 0x0004）指定的字符集，并以 NULL 结尾；若字符串占满该寄存器的整个存储区，则 NULL 结尾为隐含的。 |
+| `R-419cd` | R | 设备 | §36 Bootstrap Registers | 247 | 1.0（1.x: `[R27-6cd]`） | bootstrap 寄存器的所有保留字段都必须置为 0。 |
+| `R-420ca` | R | 应用 | §36 Bootstrap Registers | 247 | 2.0 | 应用必须忽略 bootstrap 寄存器中的保留字段。 |
+| `R-421cd` | R | 设备 | §36 Bootstrap Registers | 247 | 1.0（1.x: `[R27-7cd]`） | 访问不受支持的 bootstrap 寄存器时，设备必须返回 GEV_STATUS_INVALID_ADDRESS。 |
+| `R-422cd` | R | 设备 | §36 Bootstrap Registers | 247 | 2.0 | 设备必须将地址空间 0x0000–0x9FFF（含两端）保留给本规范定义的 bootstrap 寄存器；厂商自定义寄存器必须分配在该地址范围之后。 |
+| `R-423cd` | R | 设备 | §36 Bootstrap Registers | 247 | 1.0（1.x: `[R27-8cd]`） | 读取只写寄存器时设备必须返回 GEV_STATUS_ACCESS_DENIED；写入只读寄存器时必须返回 GEV_STATUS_WRITE_PROTECT。 |
+| `O-424ca` | O | 应用 | §36 Bootstrap Registers | 247 | 1.0（1.x: `[O27-9ca]`） | 应用应使用 READMEM 消息读取 bootstrap 寄存器中的字符串。 |
+| `CR-425cd` | CR | 设备 | §36 Bootstrap Registers | 247 | 1.0（1.x: `[CR27-16cd]`） | 若设备不支持某个可选的字符串 bootstrap 寄存器，对其执行 READMEM 时必须返回 GEV_STATUS_INVALID_ADDRESS，且报文头的 length 字段置为 0。 |
+| `CR-426cd` | CR | 设备 | §36 Bootstrap Registers | 247 | 1.0（1.x: `[CR27-17cd]`） | 若设备不支持某个可选的字符串 bootstrap 寄存器，对其执行 WRITEMEM 时必须返回 GEV_STATUS_INVALID_ADDRESS，且报文头的 index 字段置为 0。 |
+| `O-427cd` | O | 设备 | §36 Bootstrap Registers | 248 | 2.0 | 当应用向 bootstrap 寄存器写入不支持的值时，设备应在确认报文（acknowledge）中返回 GEV_STATUS_INVALID_PARAMETER，且该寄存器必须保持原值。 |
+| `O-428cd` | O | 设备 | §36 Bootstrap Registers | 248 | 2.0 | 当应用访问寄存器而设备暂时无法执行该请求时，设备应返回 GEV_STATUS_BUSY。 |
+| `R-429cd` | R | 设备 | §36.1 Version Register | 269 | 2.0 | 设备必须实现 Version 寄存器。 |
+| `R-430cd` | R | 设备 | §36.2 Device Mode Register | 270 | 2.0 | 设备必须实现 Device Mode 寄存器。 |
+| `R-431cd` | R | 设备 | §36.3 Device MAC Address Registers | 271 | 1.0（1.x: `[R27-10cd]`） | 设备必须在其支持的每个网络接口上实现 Device MAC Address 寄存器，High Part 和 Low Part 两个寄存器都必须可用；对不支持的网络接口必须返回 GEV_STATUS_INVALID_ADDRESS。 |
+| `R-432cd` | R | 设备 | §36.4 Network Interface Capability Registers | 273 | 1.0（1.x: `[R27-11cd]`） | 设备必须在其支持的每个网络接口上实现 Network Interface Capability 寄存器；对不支持的网络接口必须返回 GEV_STATUS_INVALID_ADDRESS。 |
+| `R-433cd` | R | 设备 | §36.5 Network Interface Configuration Registers | 274 | 1.0（1.x: `[R27-12cd]`） | 设备必须在其支持的每个网络接口上实现 Network Interface Configuration 寄存器；对不支持的网络接口必须返回 GEV_STATUS_INVALID_ADDRESS。 |
+| `R-434cd` | R | 设备 | §36.6 Current IP Address Registers | 275 | 1.0（1.x: `[R27-13cd]`） | 设备必须在其支持的每个网络接口上支持 Current IP Address 寄存器；对不支持的接口必须返回 GEV_STATUS_INVALID_ADDRESS。 |
+| `R-435cd` | R | 设备 | §36.7 Current Subnet Mask Registers | 276 | 1.0（1.x: `[R27-14cd]`） | 设备必须在其支持的每个网络接口上支持 Current Subnet Mask 寄存器；对不支持的网络接口必须返回 GEV_STATUS_INVALID_ADDRESS。 |
+| `R-436cd` | R | 设备 | §36.8 Current Default Gateway Registers | 277 | 1.0（1.x: `[R27-15cd]`） | 设备必须在其支持的每个网络接口上支持 Current Default Gateway 寄存器；对不支持的网络接口必须返回 GEV_STATUS_INVALID_ADDRESS。 |
+| `R-437cd` | R | 设备 | §36.9 Manufacturer Name Register | 278 | 2.0 | 设备必须实现 Manufacturer Name 寄存器。 |
+| `R-438cd` | R | 设备 | §36.10 Model Name Register | 278 | 2.0 | 设备必须实现 Model Name 寄存器。 |
+| `R-439cd` | R | 设备 | §36.11 Device Version Register | 279 | 2.0 | 设备必须实现 Device Version 寄存器。 |
+| `R-440cd` | R | 设备 | §36.12 Manufacturer Info Register | 279 | 2.0 | 设备必须实现 Manufacturer Info 寄存器。 |
+| `O-441cd` | O | 设备 | §36.13 Serial Number Register | 280 | 2.0 | 设备应实现 Serial Number 寄存器。 |
+| `O-442cd` | O | 设备 | §36.14 User-defined Name Register | 280 | 2.0 | 设备应实现 User-defined Name 寄存器。 |
+| `CR-443cd` | CR | 设备 | §36.14 User-defined Name Register | 281 | 1.0（1.x: `[CR27-18cd]`） | 若支持 User-defined Name 寄存器，设备必须提供持久化存储来保存用户自定义名称，使其在重新上电后仍可读取；应用一旦设置该寄存器，其状态即存入非易失性存储器。 |
+| `R-444cd` | R | 设备 | §36.15 First URL Register | 281 | 2.0 | 即使存在 Manifest Table，设备也必须实现 First URL 寄存器。 |
+| `R-445cd` | R | 设备 | §36.16 Second URL Register | 282 | 2.0 | 即使存在 Manifest Table，设备也必须实现 Second URL 寄存器。 |
+| `R-446cd` | R | 设备 | §36.17 Number of Network Interfaces Register | 282 | 2.0 | 设备必须实现 Number of Network Interfaces 寄存器。 |
+| `CR-447cd` | CR | 设备 | §36.18 Persistent IP Address Registers | 283 | 1.0（1.x: `[CR27-21cd]`） | 若支持 Persistent IP，设备必须在其支持的每个网络接口上实现 Persistent IP Address 寄存器；对不支持的网络接口必须返回 GEV_STATUS_INVALID_ADDRESS。 |
+| `CR-448cd` | CR | 设备 | §36.19 Persistent Subnet Mask Registers | 284 | 1.0（1.x: `[CR27-22cd]`） | 若支持 Persistent IP，设备必须在其支持的每个网络接口上实现 Persistent Subnet Mask 寄存器；对不支持的网络接口必须返回 GEV_STATUS_INVALID_ADDRESS。 |
+| `CR-449cd` | CR | 设备 | §36.20 Persistent Default Gateway Registers | 285 | 1.0（1.x: `[CR27-23cd]`） | 若支持 Persistent IP，设备必须在其支持的每个网络接口上实现 Persistent Default Gateway 寄存器；对不支持的网络接口必须返回 GEV_STATUS_INVALID_ADDRESS。 |
+| `CR-450cd` | CR | 设备 | §36.21 Link Speed Registers | 285 | 1.1（1.x: `[CR27-38cd]`） | 若支持 Link Speed 寄存器，设备必须在其支持的每个网络接口上实现一个 Link Speed 寄存器；对不支持的网络接口必须返回 GEV_STATUS_INVALID_ADDRESS。 |
+| `R-451cd` | R | 设备 | §36.22 Number of Message Channels Register | 286 | 2.0 | 设备必须实现 Number of Message Channels 寄存器。 |
+| `R-452cd` | R | 设备 | §36.23 Number of Stream Channels Register | 287 | 2.0 | 设备必须实现 Number of Stream Channels 寄存器。 |
+| `R-605cd` | R | 设备 | §36.23 Number of Stream Channels Register | 287 | 3.0 | 设备支持的流通道数量必须保持不变，不随所选的流协议或任何其他设备配置而改变。 |
+| `CR-453cd` | CR | 设备 | §36.24 Number of Action Signals Register | 288 | 2.0 | 若设备支持 Action 命令，则必须实现 Number of Action Signals 寄存器。 |
+| `CR-454cd` | CR | 设备 | §36.25 Action Device Key Register | 288 | 2.0 | 若设备支持 Action 命令，则必须实现 Action Device Key 寄存器。 |
+| `R-455cd` | R | 设备 | §36.26 Number of Active Links | 289 | 2.0 | 设备必须实现 Number of Active Links（活动链路数）寄存器。 |
+| `R-456cd` | R | 设备 | §36.27 Streaming Capability Register | 290 | 2.0 | 发送端、接收端或收发端（transceiver）设备必须实现 Streaming Capability 寄存器。 |
+| `R-606s` | R | 流收发两端 | §36.27 Streaming Capability Register | 291 | 3.0 | 当 gvsp_mode_not_supported 位未置位时，发送端、接收端和收发端设备必须至少支持 Table 25-1 所列 GVSP 负载类型中的一种。 |
+| `R-607s` | R | 流收发两端 | §36.27 Streaming Capability Register | 291 | 3.0 | 发送端、接收端和收发端设备必须至少支持 GVSP 或 GVRSP 中的一种流协议：gvsp_mode_not_supported 位未置位表示支持 GVSP，gvrsp_mode_supported 位置位表示支持 GVRSP。 |
+| `CR-663cd` | CR | 设备 | §36.27 Streaming Capability Register | 291 | 3.0 | 若设备支持 GVRSP 流传输，则它必须是发送端（Transmitter，由 Device Mode 寄存器的 device_class 字段报告）。 |
+| `CR-664cd` | CR | 设备 | §36.27 Streaming Capability Register | 291 | 3.0 | 若设备仅支持 GVRSP 流（gvsp_mode_not_supported 与 gvrsp_mode_supported 位均置位），则不得置位 SCSPx_supported 位。 |
+| `CR-665cd` | CR | 设备 | §36.27 Streaming Capability Register | 291 | 3.0 | 若设备支持 GVRSP 流（gvrsp_mode_supported 位置位），则必须置位 SCEBAx_supported 位。 |
+| `R-457cd` | R | 设备 | §36.28 Message Channel Capability Register | 291 | 2.0 | 设备必须实现 Message Channel Capability 寄存器。 |
+| `R-458cd` | R | 设备 | §36.29 GVCP Capability Register | 292 | 2.0 | 设备必须实现 GVCP Capability 寄存器。 |
+| `CR-666cd` | CR | 设备 | §36.29 GVCP Capability Register | 294 | 3.0 | 若设备仅支持 GVRSP 流（Streaming Capability 寄存器的 gvsp_mode_not_supported 与 gvrsp_mode_supported 位均置位），则不得置位 GVCP Capability 寄存器的 PACKETRESEND 位。 |
+| `R-459cd` | R | 设备 | §36.30 Heartbeat Timeout Register | 295 | 2.0 | 设备必须实现 Heartbeat Timeout 寄存器。 |
+| `O-460cd` | O | 设备 | §36.30 Heartbeat Timeout Register | 295 | 1.0（1.x: `[O27-24cd]`） | 对小于 500 ms 的心跳超时值，设备应按默认 500 ms 处理，并更新 Heartbeat Timeout 寄存器内容以反映设备实际使用的值。 |
+| `CR-461cd` | CR | 设备 | §36.31 Timestamp Tick Frequency Registers | 296 | 1.0（1.x: `[O27-25cd]`） | 若设备支持时间戳计数器，则必须实现 Timestamp Tick Frequency 寄存器，且 High Part 与 Low Part 两个寄存器都必须提供；其值为 0 或寄存器不存在即表示无时间戳计数器，也就不提供控制包间延迟的机制。 |
+| `CR-462cd` | CR | 设备 | §36.32 Timestamp Control Register | 297 | 2.0 | 若设备支持时间戳计数器，则必须实现 Timestamp Control 寄存器。 |
+| `CR-463ca` | CR | 应用 | §36.32 Timestamp Control Register | 297 | 1.0（1.x: `[CR27-26ca]`） | 若存在时间戳计数器，应用不得尝试读取 Timestamp Control 寄存器（该寄存器为只写）。 |
+| `CR-464cd` | CR | 设备 | §36.32 Timestamp Control Register | 298 | 1.0（1.x: `[CR27-27cd]`） | 若存在时间戳计数器，当应用在同一次访问中同时置位 Latch 和 Reset 位时，设备必须先锁存时间戳再将其复位。 |
+| `CR-466ca` | CR | 应用 | §36.33 Timestamp Value Registers | 298 | 1.0（1.x: `[CR27-28ca]`） | 若设备支持时间戳计数器且应用要获取其 64 位值，应用必须向 Timestamp Control 寄存器的 bit 30（latch）写 1，使自由运行的计数器值被复制到 Timestamp Value 寄存器。 |
+| `CR-467cd` | CR | 设备 | §36.33 Timestamp Value Registers | 298 | 1.0（1.x: `[CR27-29cd]`） | 若设备不支持时间戳，Timestamp Value 寄存器必须始终为 0。 |
+| `O-468cd` | O | 设备 | §36.34 Discovery ACK Delay Register | 300 | 2.0 | 设备应实现 Discovery ACK Delay 寄存器。 |
+| `CR-469cd` | CR | 设备 | §36.34 Discovery ACK Delay Register | 300 | 1.1（1.x: `[CR27-41cd]`） | 若 Discovery ACK Delay 寄存器可写，则其值必须持久保存在非易失性存储器中，供下次设备复位或重新上电后继续使用。 |
+| `CR-470cd` | CR | 设备 | §36.34 Discovery ACK Delay Register | 300 | 1.1（1.x: `[CR27-42cd]`） | 若支持 Discovery ACK Delay，该寄存器的出厂默认值必须小于或等于 1000 ms（1 秒）。 |
+| `O-471cd` | O | 设备 | §36.35 GVCP Configuration Register | 301 | 2.0 | 设备应实现 GVCP Configuration 寄存器。 |
+| `CR-571s` | CR | 流收发两端 | §36.35 GVCP Configuration Register | 302 | 2.1 | 若 GVSP 发送端或接收端支持 GVCP Configuration 寄存器，则当其控制通道关闭且无条件流（unconditional streaming）与无条件 Action 均未激活时，必须将 heartbeat_disable 字段恢复为出厂默认值。 |
+| `R-472cd` | R | 设备 | §36.36 Pending Timeout Register | 302 | 2.0 | 设备必须实现 Pending Timeout 寄存器。 |
+| `CR-473cd` | CR | 设备 | §36.37 Control Switchover Key Register | 303 | 2.0 | 若设备支持主应用切换（primary application switchover），则必须实现 Control Switchover Key 寄存器。 |
+| `R-474cd` | R | 设备 | §36.38 Streaming Configuration Register | 304 | 2.0 | 发送端、接收端或收发端设备必须实现 Streaming Configuration 寄存器。 |
+| `R-667cd` | R | 设备 | §36.38 Streaming Configuration Register | 305 | 3.0 | 当任一 GVSP 流通道已打开（某 SCPx 非零）或任一 GVRSP 流已使能（某 RSCCTLx 的 stream_enable 位置位）时，设备必须禁止写 Streaming Configuration 寄存器；此时应用写入必须返回 GEV_STATUS_BUSY。 |
+| `R-668cd` | R | 设备 | §36.38 Streaming Configuration Register | 305 | 3.0 | 设备必须强制对 streaming_protocol 字段的写入遵循 Table 36-2 的规则。 |
+| `CR-669cd` | CR | 设备 | §36.38 Streaming Configuration Register | 306 | 3.0 | 若设备支持 GVSP 流（Streaming Capability 寄存器的 gvsp_mode_not_supported 位未置位），则 Streaming Configuration 寄存器 streaming_protocol 字段的出厂默认值必须为 0。 |
+| `CR-670cd` | CR | 设备 | §36.38 Streaming Configuration Register | 306 | 3.0 | 若设备仅支持 GVRSP 流（Streaming Capability 寄存器的 gvsp_mode_not_supported 与 gvrsp_mode_supported 位均置位），则 Streaming Configuration 寄存器 streaming_protocol 字段的出厂默认值必须为 1。 |
+| `R-475cd` | R | 设备 | §36.39 Physical Link Configuration Capability Register | 306 | 2.0 | 设备必须实现 Physical Link Configuration Capability 寄存器。 |
+| `R-476cd` | R | 设备 | §36.40 Physical Link Configuration Register | 307 | 2.0 | 设备必须实现 Physical Link Configuration 寄存器。 |
+| `CR-477cd` | CR | 设备 | §36.41 IEEE 1588 Status Register | 308 | 2.0 | 若设备支持 IEEE 1588，则必须实现 IEEE 1588 Status 寄存器。 |
+| `CR-478cd` | CR | 设备 | §36.42 Scheduled Action Command Queue Size Register | 309 | 2.0 | 若设备支持定时动作命令（Scheduled Action Commands），则必须实现 Scheduled Action Command Queue Size 寄存器。 |
+| `CR-558cd` | CR | 设备 | §36.43 IEEE 1588 Extended Capability Register | 310 | 2.1 | 若设备通过置位 GVCP Capability 寄存器的 bit 15 表明支持 IEEE1588_extended_capabilities（IEC），则必须实现 IEEE 1588 Extended Capability 寄存器。 |
+| `CR-559cd` | CR | 设备 | §36.44 IEEE 1588 Supported Profiles Register | 310 | 2.1 | 若设备通过置位 IEEE 1588 Extended Capability 寄存器的 bit 0 表明支持 profile_reg_presence，则必须实现 IEEE 1588 Supported Profiles 寄存器。 |
+| `CR-560cd` | CR | 设备 | §36.45 IEEE 1588 Selected Profile Register | 311 | 2.1 | 若设备通过置位 IEEE 1588 Extended Capability 寄存器的 bit 0 表明支持 profile_reg_presence，则必须实现 IEEE 1588 Selected Profile 寄存器。 |
+| `R-479cd` | R | 设备 | §36.46 Control Channel Privilege Register (CCP) | 312 | 2.0 | 设备必须实现 Control Channel Privilege（CCP）寄存器。 |
+| `O-480cd` | O | 设备 | §36.47 Primary Application Port Register | 314 | 2.0 | 设备应实现 Primary Application Port 寄存器。 |
+| `O-481cd` | O | 设备 | §36.48 Primary Application IP Address Register | 315 | 2.0 | 设备应实现 Primary Application IP Address 寄存器。 |
+| `CR-608cd` | CR | 设备 | §36.49 Control Channel Max Packet Size Register (CCMPS) | 316 | 3.0 | 若 GVCP Capability 寄存器的 control_channel_large_packet_size 位置位，设备必须实现 Control Channel Max Packet Size（CCMPS）寄存器。 |
+| `CR-609cd` | CR | 设备 | §36.49 Control Channel Max Packet Size Register (CCMPS) | 316 | 3.0 | 设备使用的控制通道最大包大小值必须 4 字节对齐，因为控制通道命令只支持 4 字节的整数倍。 |
+| `CR-610cd` | CR | 设备 | §36.49 Control Channel Max Packet Size Register (CCMPS) | 316 | 3.0 | CCMPS 中 max_packet_size 的值必须至少为 576。 |
+| `CR-611cd` | CR | 设备 | §36.50 Control Channel Test Region Address Register (CCTRA) | 317 | 3.0 | 若 GVCP Capability 寄存器的 control_channel_large_packet_size 位置位，设备必须实现 Control Channel Test Region Address（CCTRA）寄存器。 |
+| `CR-482cd` | CR | 设备 | §36.51 Message Channel Port Register (MCP) | 317 | 2.0 | 若设备支持消息通道（Message Channel），则必须实现 Message Channel Port（MCP）寄存器。 |
+| `CR-483cd` | CR | 设备 | §36.52 Message Channel Destination Address Register (MCDA) | 318 | 2.0 | 若设备支持消息通道，则必须实现 Message Channel Destination Address（MCDA）寄存器。 |
+| `CR-484cd` | CR | 设备 | §36.53 Message Channel Transmission Timeout Register (MCTT) | 319 | 2.0 | 若设备支持消息通道，则必须实现 Message Channel Transmission Timeout（MCTT）寄存器。 |
+| `CR-485cd` | CR | 设备 | §36.53 Message Channel Transmission Timeout Register (MCTT) | 319 | 1.0（1.x: `[CR27-32cd]`） | 支持消息通道时，MCTT 寄存器规定：设备在消息通道上发出要求确认的消息后，必须等待确认多长时间才判定超时。 |
+| `CR-486cd` | CR | 设备 | §36.54 Message Channel Retry Count Register (MCRC) | 320 | 2.0 | 若设备支持消息通道，则必须实现 Message Channel Retry Count（MCRC）寄存器。 |
+| `CO-487cd` | CO | 设备 | §36.55 Message Channel Source Port Register (MCSP) | 321 | 2.0 | 若设备支持消息通道，则应实现 Message Channel Source Port（MCSP）寄存器。 |
+| `CR-585cd` | CR | 设备 | §36.56 Message Channel Configuration (MCCFG) | 321 | 2.2 | 若设备支持消息通道的可选功能，则必须实现 Message Channel Configuration（MCCFG）寄存器。 |
+| `CR-488cd` | CR | 设备 | §36.57 GVSP Stream Channel Port Registers (SCPx) | 322 | 2.0 | 若设备支持 GVSP 协议，则必须为其支持的所有流通道实现 GVSP Stream Channel Port（SCPx）寄存器。 |
+| `R-561ca` | R | 应用 | §36.57 GVSP Stream Channel Port Registers (SCPx) | 322 | 2.1 | 应用在写 SCDAx、SCCFGx 和 SCPSx 寄存器之前，必须先将（SCPx 的）host_port 字段设为 0；SCPSx 在包大小协商期间除外。 |
+| `R-586cd` | R | 设备 | §36.57 GVSP Stream Channel Port Registers (SCPx) | 322 | 2.2 | 常规流传输期间，设备必须禁止写 SCPx 寄存器（写入 0 以关闭流除外）；写访问被禁止时应用写入必须返回 GEV_STATUS_BUSY。 |
+| `R-671cd` | R | 设备 | §36.57 GVSP Stream Channel Port Registers (SCPx) | 322 | 3.0 | 若实现了 SCPx 寄存器，当设备工作于 GVRSP 模式（Streaming Configuration 寄存器 streaming_protocol 字段为 1）时，必须阻止对其访问并返回 GEV_STATUS_ACCESS_DENIED。 |
+| `CR-489cd` | CR | 设备 | §36.58 GVSP Stream Channel Packet Size Registers (SCPSx) | 324 | 2.0 | 若设备支持 GVSP 协议，则必须为其所有流通道实现 GVSP Stream Channel Packet Size（SCPSx）寄存器。 |
+| `R-490st` | R | 流发送端 | §36.58 GVSP Stream Channel Packet Size Registers (SCPSx) | 326 | 2.0 | 除非应用执行了写 SCPSx 寄存器的操作，否则 GVSP 发送端不得自行改变包大小值。 |
+| `R-562st` | R | 流发送端 | §36.58 GVSP Stream Channel Packet Size Registers (SCPSx) | 326 | 2.1 | 若 GVSP 发送端不支持所请求的 packet_size，则被要求时不得发送测试包，且必须将 packet_size 向下取整到最接近的支持值并更新寄存器；若请求值小于最小支持值，则须向上取整到最接近的支持值。 |
+| `CR-491cd` | CR | 设备 | §36.59 GVSP Stream Channel Packet Delay Registers (SCPDx) | 326 | 2.0 | 若设备支持 GVSP 协议，则必须为其所有流通道实现 GVSP Stream Channel Packet Delay（SCPDx）寄存器。 |
+| `CR-492cd` | CR | 设备 | §36.60 GVSP Stream Channel Destination Address Registers (SCDAx) | 327 | 2.0 | 若设备支持 GVSP 协议，则必须为其所有流通道实现 GVSP Stream Channel Destination Address（SCDAx）寄存器。 |
+| `R-588cd` | R | 设备 | §36.60 GVSP Stream Channel Destination Address Registers (SCDAx) | 327 | 2.2 | 常规流传输期间，设备必须禁止写 SCDAx（GVSP Stream Channel Destination Address）寄存器；写访问被禁止时应用写入必须返回 GEV_STATUS_BUSY。 |
+| `CO-493cd` | CO | 设备 | §36.61 GVSP Stream Channel Source Port Registers (SCSPx) | 328 | 2.0 | 若设备支持 GVSP 协议，则应为其所有流通道实现 GVSP Stream Channel Source Port（SCSPx）寄存器。 |
+| `CR-494cd` | CR | 设备 | §36.62 GVSP Stream Channel Capability Registers (SCCx) | 329 | 2.0 | 若设备支持 GVSP 协议，则必须为其所有流通道实现 GVSP Stream Channel Capability（SCCx）寄存器。 |
+| `CR-589cd` | CR | 设备 | §36.62 GVSP Stream Channel Capability Registers (SCCx) | 331 | 2.2 | 若设备支持 gendc_supported，则必须同时支持 scmpcx_supported（均为 SCCx 中的能力位）。 |
+| `CR-495cd` | CR | 设备 | §36.63 GVSP Stream Channel Configuration Registers (SCCFGx) | 331 | 2.0 | 若设备支持 GVSP 协议，则必须为其所有流通道实现 GVSP Stream Channel Configuration（SCCFGx）寄存器。 |
+| `R-590cd` | R | 设备 | §36.63 GVSP Stream Channel Configuration Registers (SCCFGx) | 331 | 2.2 | 常规流传输期间，设备必须禁止写 SCCFGx（GVSP Stream Channel Configuration）寄存器；写访问被禁止时应用写入必须返回 GEV_STATUS_BUSY。 |
+| `CR-570s` | CR | 流收发两端 | §36.63 GVSP Stream Channel Configuration Registers (SCCFGx) | 333 | 2.1 | 若 GVSP 发送端支持 SCCFGx 寄存器，则当其控制通道关闭且无条件流与无条件 Action 均未激活时，必须将该寄存器内容恢复为出厂默认值。 |
+| `CR-591cd` | CR | 设备 | §36.64 GVSP Stream Channel Max Packet Count Registers (SCMPCx) | 334 | 2.2 | 若设备支持 GVSP 协议，则必须为其所有流通道实现 GVSP Stream Channel Max Packet Count（SCMPCx）寄存器。 |
+| `R-592st` | R | 流发送端 | §36.64 GVSP Stream Channel Max Packet Count Registers (SCMPCx) | 334 | 2.2 | 常规流传输进行期间，GVSP 发送端不得更改 SCMPCx 寄存器的内容。 |
+| `CR-593cd` | CR | 设备 | §36.65 GVSP Stream Channel Max Block Size Registers (SCMBSx) | 335 | 2.2 | 若设备支持 GVSP 协议，则必须为其支持的所有流通道实现 GVSP Stream Channel Max Block Size（SCMBSx）寄存器。 |
+| `R-594st` | R | 流发送端 | §36.65 GVSP Stream Channel Max Block Size Registers (SCMBSx) | 335 | 2.2 | 常规流传输进行期间，GVSP 发送端不得更改 SCMBSx 寄存器的内容。 |
+| `R-595cd` | R | 设备 | §36.66 Stream Channel Extended Bootstrap Address Registers (SCEBAx) | 336 | 2.2 | 设备必须为其支持的所有流通道实现 Stream Channel Extended Bootstrap Address（SCEBAx）寄存器。 |
+| `CR-596cd` | CR | 设备 | §36.67 Stream Channel GenDC Descriptor Address (SCGDAx) | 337 | 2.2 | 若支持流通道的设备也支持 GenDC 负载，则必须为每个支持 GenDC 负载的流通道实现 Stream Channel GenDC Descriptor Address（SCGDAx）寄存器。 |
+| `R-597st` | R | 流发送端 | §36.67 Stream Channel GenDC Descriptor Address (SCGDAx) | 338 | 2.2 | 常规流传输进行期间，GVSP 发送端不得更改 GenDC 描述符的内容。 |
+| `CR-598cd` | CR | 设备 | §36.68 Stream Channel GenDC Descriptor Size (SCGDSx) | 338 | 2.2 | 若支持流通道的设备也支持 GenDC 负载，则必须为每个支持 GenDC 负载的流通道实现 Stream Channel GenDC Descriptor Size（SCGDSx）寄存器。 |
+| `CR-599cd` | CR | 设备 | §36.69 Stream Channel GenDC Flow Mapping Table Address (SCGFTAx) | 339 | 2.2 | 若设备有能传输 GenDC 容器的流通道，则必须为每个此类通道实现 Stream Channel GenDC Flow Mapping Table Address（SCGFTAx）寄存器。 |
+| `R-600st` | R | 流发送端 | §36.69 Stream Channel GenDC Flow Mapping Table Address (SCGFTAx) | 340 | 2.2 | 常规流传输进行期间，GVSP 发送端不得更改 GenDC 流映射表（flow mapping table）的内容。 |
+| `CR-601cd` | CR | 设备 | §36.70 Stream Channel GenDC Flow Mapping Table Size (SCGFTSx) | 340 | 2.2 | 若设备有能传输 GenDC 容器的流通道，则必须为每个此类通道实现 Stream Channel GenDC Flow Mapping Table Size（SCGFTSx）寄存器。 |
+| `CR-672cd` | CR | 设备 | §36.71 GVRSP Stream Channel Control Register (RSCCTLx) | 341 | 3.0 | 若设备支持 GVRSP 协议，则必须为其所有流通道实现 GVRSP Stream Channel Control（RSCCTLx）寄存器。 |
+| `CR-673cd` | CR | 设备 | §36.71 GVRSP Stream Channel Control Register (RSCCTLx) | 341 | 3.0 | 若设备同时支持 GVSP 和 GVRSP 模式，则在 GVSP 模式下（Streaming Configuration 寄存器 streaming_protocol 字段为 0）必须禁止对 RSCCTLx 寄存器的任何访问，对其读写均须返回 GEV_STATUS_ACCESS_DENIED。 |
+| `CR-674cd` | CR | 设备 | §36.72 GVRSP Stream Channel Buffer Layout Table Address Register(RSCBLTAx) | 342 | 3.0 | 若设备支持 GVRSP 协议，则必须为其所有流通道实现 GVRSP Stream Channel Buffer Layout Table Address（RSCBLTAx）寄存器。 |
+| `CR-675cd` | CR | 设备 | §36.73 GVRSP Stream Channel Buffer Layout Table Size Register (RSCBLTSx) | 342 | 3.0 | 若设备支持 GVRSP 协议，则必须为其所有流通道实现 GVRSP Stream Channel Buffer Layout Table Size（RSCBLTSx）寄存器。 |
+| `CR-676cd` | CR | 设备 | §36.73 GVRSP Stream Channel Buffer Layout Table Size Register (RSCBLTSx) | 342 | 3.0 | RSCBLTSx 寄存器的值必须不小于 4 + 8 = 12 字节（buffer_count 加至少一个缓冲区条目）。 |
+| `CR-677cd` | CR | 设备 | §36.74 GVRSP Stream Channel Credits Counter Maximum Supported Value Register (RSCCMAXx) | 343 | 3.0 | 若设备支持 GVRSP 协议，则必须为其所有流通道实现 GVRSP Stream Channel Credits Counter Maximum Supported Value（RSCCMAXx）寄存器。 |
+| `CR-678cd` | CR | 设备 | §36.74 GVRSP Stream Channel Credits Counter Maximum Supported Value Register (RSCCMAXx) | 343 | 3.0 | RSCCMAXx 寄存器（信用计数器最大支持值）的值必须不小于 1。 |
+| `CR-679cd` | CR | 设备 | §36.75 GVRSP Stream Channel Credits Counter Current Value Register (RSCCCNTx) | 344 | 3.0 | 若设备支持 GVRSP 协议，则必须为其所有流通道实现 GVRSP Stream Channel Credits Counter Current Value（RSCCCNTx）寄存器。 |
+| `CR-680cd` | CR | 设备 | §36.76 GVRSP Stream Channel Upstream Capability Register (RSCUCAPx) | 345 | 3.0 | 若设备支持 GVRSP 协议，则必须为其所有流通道实现 GVRSP Stream Channel Upstream Capability（RSCUCAPx）寄存器。 |
+| `CR-681cd` | CR | 设备 | §36.77 GVRSP Stream Channel Upstream Maximum Supported Message Size Register (RSCUMAXx) | 345 | 3.0 | 若设备支持 GVRSP 协议，则必须为其所有流通道实现 GVRSP Stream Channel Upstream Maximum Supported Message Size（RSCUMAXx）寄存器。 |
+| `CR-682cd` | CR | 设备 | §36.77 GVRSP Stream Channel Upstream Maximum Supported Message Size Register (RSCUMAXx) | 346 | 3.0 | RSCUMAXx 寄存器的值必须不小于 4（即必备的 MSG_CREDITS 消息的大小）；若设备支持设备自定义的上行消息，该值可大于 4。 |
+| `CR-683cd` | CR | 设备 | §36.78 GVRSP Stream Channel QP Connection Key Register (RSCCKEYx) | 346 | 3.0 | 若设备支持 GVRSP 协议，则必须为其所有流通道实现 GVRSP Stream Channel QP Connection Key（RSCCKEYx）寄存器。 |
+| `CR-684cd` | CR | 设备 | §36.78 GVRSP Stream Channel QP Connection Key Register (RSCCKEYx) | 346 | 3.0 | 若设备同时支持 GVSP 和 GVRSP 模式，则在 GVSP 模式下（Streaming Configuration 寄存器 streaming_protocol 字段为 0）必须禁止对 RSCCKEYx 寄存器的任何访问，对其读写均须返回 GEV_STATUS_ACCESS_DENIED。 |
+| `CR-685st` | CR | 流发送端 | §36.78 GVRSP Stream Channel QP Connection Key Register (RSCCKEYx) | 347 | 3.0 | 若发送端工作于 GVRSP 模式，则其控制通道关闭时必须将 RSCCKEYx 寄存器内容复位为出厂默认值（0）。 |
+| `CR-686st` | CR | 流发送端 | §36.78 GVRSP Stream Channel QP Connection Key Register (RSCCKEYx) | 347 | 3.0 | 若发送端工作于 GVRSP 模式，则必须拒绝所携 qp_connection_key 与相应流通道 RSCCKEYx 引导寄存器值不相等的连接请求（CM REQ），见 31.4 节。 |
+| `CR-687st` | CR | 流发送端 | §36.78 GVRSP Stream Channel QP Connection Key Register (RSCCKEYx) | 347 | 3.0 | 若发送端工作于 GVRSP 模式，则必须拒绝 qp_connection_key 为 0 的连接请求（CM REQ），因 0 不是有效的 qp_connection_key（见 31.4 节）。 |
+| `O-498cd` | O | 设备 | §36.79 Manifest Table | 348 | 2.0 | 设备应实现 Manifest Table（清单表）。 |
+| `R-499ca` | R | 应用 | §36.79 Manifest Table | 348 | 2.0 | 应用必须支持 Manifest Table（清单表）。 |
+| `CR-500cd` | CR | 设备 | §36.79.3 URL Pair | 350 | 1.1（1.x: `[CR27-47cd]`） | 若支持 URL Pair，则其引用的 URL 字符串必须使用 Device Mode 寄存器所指示的字符集。 |
+| `CR-501cd` | CR | 设备 | §36.79.3 URL Pair | 351 | 1.1（1.x: `[CR27-48cd]`） | 若支持 URL Pair 且文件经 ZIP 压缩，则被引用的文档必须是 ZIP 文件中的第一个文件；其后可跟任意数量的其他文件，其内容本规范不作定义。 |
+| `CR-502cd` | CR | 设备 | §36.79.3 URL Pair | 351 | 1.1（1.x: `[CR27-49cd]`） | 若支持 URL Pair，则当文档内容变化时，清单条目中的元组 {XMLMajorVersion, XMLMinorVersion, XMLSubMinorVersion, SchemaMajorVersion, SchemaMinorVersion} 必须随之改变，因此可用作缓存该文档的键。 |
+| `CR-503cd` | CR | 设备 | §36.80 Action Group Key Registers (ACTION_GROUP_KEYx) | 351 | 2.0 | 若设备支持 Action 命令，则必须按所支持的 action 数量（最多 128 个）实现 Action Group Key（ACTION_GROUP_KEYx）寄存器。 |
+| `CR-504cd` | CR | 设备 | §36.81 Action Group Mask Registers (ACTION_GROUP_MASKx) | 352 | 2.0 | 若设备支持 Action 命令，则必须按所支持的 action 数量（最多 128 个）实现 Action Group Mask（ACTION_GROUP_MASKx）寄存器。 |
+
+<a id="ch-37"></a>
+### Chapter 37. Standard Features List for Cameras  ·  Interoperability
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `R-505cd` | R | 设备 | §37.1 Introduction | 354 | 1.0（1.x: `[R28-1cd]`） | 为保证 GigE Vision 设备与应用软件的互操作性，设备提供的 GenICam XML 设备描述文件必须符合 GenICam 规范，包括 SFNC 2.8 或更高版本。 |
+| `CR-506st` | CR | 流发送端 | §37.5 XML Description File Mandatory Features | 357 | 1.0（1.x: `[CR28-2st]`） | 除控制相机和建立流通道所需的引导寄存器外，流发送端还必须在其 XML 描述文件中支持 Table 37-1 所列的特性。 |
+| `CR-507st` | CR | 流发送端 | §37.5.1 Width and Height Features | 360 | 1.0（1.x: `[CR28-3st]`） | Width 和 Height 特性必须使用 GenICam 规范的 IInteger 接口（64 位整数）表示。 |
+| `CR-508st` | CR | 流发送端 | §37.5.1 Width and Height Features | 360 | 1.0（1.x: `[CR28-4st]`） | Width 和 Height 特性必须以像素为单位。 |
+| `CR-509st` | CR | 流发送端 | §37.5.1 Width and Height Features | 360 | 1.0（1.x: `[CR28-5st]`） | Width 特性必须只取正值。 |
+| `CR-510st` | CR | 流发送端 | §37.5.1 Width and Height Features | 360 | 1.0（1.x: `[CR28-6st]`） | Width 特性必须可读。 |
+| `CR-511st` | CR | 流发送端 | §37.5.1 Width and Height Features | 360 | 1.0（1.x: `[CR28-7st]`） | Height 特性必须只取正值。 |
+| `CR-512st` | CR | 流发送端 | §37.5.1 Width and Height Features | 360 | 1.0（1.x: `[CR28-8st]`） | Height 特性必须可读。 |
+| `CR-514st` | CR | 流发送端 | §37.5.2 PixelFormat Feature | 361 | 1.0（1.x: `[CR28-11st]`） | 若 PixelFormat 特性的某个枚举项使用了“GenICam Pixel Format Values”中的名称，则该项必须使用其中对应的数值。 |
+| `CR-517st` | CR | 流发送端 | §37.5.3 PayloadSize Feature | 361 | 1.0（1.x: `[CR28-14st]`） | PayloadSize 特性必须只取正值。 |
+| `CR-520st` | CR | 流发送端 | §37.5.4 GevSCPSPacketSize | 362 | 2.0 | GevSCPSPacketSize 特性必须只取 46 到 65535 范围内的整数值；发送端可在此范围内限定更小的取值范围。 |
+| `CR-521st` | CR | 流发送端 | §37.5.4 GevSCPSPacketSize | 362 | 2.0 | 通过 GevSCPSPacketSize 特性读取或设置的值必须反映在对应 SCPS 引导寄存器的 packet_size 字段中。 |
+| `CR-523st` | CR | 流发送端 | §37.5.5 AcquisitionMode Feature | 362 | 1.0（1.x: `[CR28-15st]`） | AcquisitionMode 特性必须可读。 |
+| `CR-524st` | CR | 流发送端 | §37.5.5 AcquisitionMode Feature | 362 | 1.0（1.x: `[CR28-16st]`） | 若 AcquisitionMode 的枚举提供多个取值，则它须可写；默认情况下 AcquisitionMode 必须处于“Continuous”状态。 |
+| `CR-526st` | CR | 流发送端 | §37.5.5 AcquisitionMode Feature | 363 | 1.0（1.x: `[CR28-18st]`） | 当 AcquisitionMode 为“Continuous”时，图像采集由 AcquisitionStart 命令启动，并一直进行到应用发出 AcquisitionStop 命令；也允许用其他命令（如可选的 AcquisitionAbort）结束采集。 |
+| `CR-528st` | CR | 流发送端 | §37.5.6 AcquisitionStart Feature | 363 | 1.0（1.x: `[CR28-21st]`） | 已发出 AcquisitionStart 后、在 AcquisitionStop 之前再次发出 AcquisitionStart 命令不得影响图像采集状态，发送端必须保持采集进行中。 |
+| `CR-530st` | CR | 流发送端 | §37.5.7 AcquisitionStop Feature | 363 | 1.0（1.x: `[CR28-23st]`） | 发出 AcquisitionStop 命令时，图像采集必须尽快在帧边界处（即数据尾 data trailer 之后）停止。 |
+| `CR-531st` | CR | 流发送端 | §37.5.7 AcquisitionStop Feature | 363 | 1.0（1.x: `[CR28-24st]`） | 已发出 AcquisitionStop 后、在 AcquisitionStart 之前再次发出 AcquisitionStop 命令不得影响图像采集状态，发送端必须保持采集停止。 |
+| `CR-602cd` | CR | 设备 | §37.6 GenDC Features | 363 | 2.2 | 若设备有能传输 GenDC 容器的流通道，则必须实现 SFNC 特性 GenDCStreamingMode、GenDCStreamingStatus、GenDCDescriptor 和 GenDCFlowMappingTable。 |
+| `CR-603cd` | CR | 设备 | §37.6 GenDC Features | 363 | 2.2 | 若设备可在多个流通道上传输 GenDC 容器，则 GenDCStreamingStatus、GenDCDescriptor 和 GenDCFlowMappingTable 特性必须由 DeviceStreamChannelSelector 特性进行选择。 |
+| `CR-612cd` | CR | 设备 | §37.7 IEEE 1588 Features | 364 | 3.0 | 若设备支持 IEEE 1588 时间同步，则必须实现 SFNC 特性 PtpEnable、PtpClockAccuracy、PtpDataSetLatch、PtpStatus、PtpServoStatus、PtpOffsetFromMaster、PtpClockID、PtpParentClockID 和 PtpGrandmasterClockID。 |
+
+<a id="ch-38"></a>
+### Chapter 38. Using GenDC Streams  ·  Interoperability
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `CR-613st` | CR | 流发送端 | §38 Using GenDC Streams | 365 | 3.0 | 若发送端实现了 Stream Channel GenDC Descriptor Address 寄存器，则当 TLParamsLocked 特性置位时，GenDC 预取描述符（prefetch descriptor）的内容必须冻结。 |
+| `CR-614st` | CR | 流发送端 | §38 Using GenDC Streams | 365 | 3.0 | 若发送端实现了 Stream Channel GenDC Flow Mapping Table Address 寄存器，则当 TLParamsLocked 特性置位时，GenDC 流映射表的内容必须冻结。 |
+
+<a id="ch-39"></a>
+### Chapter 39. Testing  ·  Interoperability
+
+| 编号 | 类型 | 适用 | 小节 | 页 | 引入 | 中文要点 |
+|---|---|---|---|---|---|---|
+| `R-563cd` | R | 设备 | §39.3 Device Features for Testing | 367 | 2.1 | 设备必须支持 Table 39-1 中定义的测试用特性。 |
+| `CR-564cd` | CR | 设备 | §39.3 Device Features for Testing | 367 | 2.1 | 若设备支持消息通道，则必须支持 Table 39-2 中定义的测试用特性。 |
+| `CR-565cd` | CR | 设备 | §39.3 Device Features for Testing | 368 | 2.1 | 若设备支持 GVSP 负载类型 Multi-part 或 GenDC，则必须支持 Table 39-3 中定义的测试用特性。 |
